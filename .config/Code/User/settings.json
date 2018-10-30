@@ -1,0 +1,26 @@
+{
+    "window.zoomLevel": 0,
+    "editor.hover.sticky": false,
+    "window.titleBarStyle": "custom",
+    "files.autoSave": "onFocusChange",
+    "editor.wordWrap": "on",
+    "workbench.iconTheme": "eq-material-theme-icons",
+    "materialTheme.fixIconsRunning": false,
+    "breadcrumbs.enabled": false,
+    "explorer.confirmDragAndDrop": false,
+    "emmet.includeLanguages": {
+        "ejs": "html",
+        "erb": "html"
+    },
+    "[ruby]": {
+        "editor.tabSize": 2
+    },
+    "workbench.colorTheme": "Material Theme",
+    "editor.minimap.enabled": false,
+    "workbench.activityBar.visible": false,
+    "terminal.integrated.drawBoldTextInBrightColors": false,
+    "terminal.integrated.fontFamily": "Meslo LG M DZ for Powerline",
+    "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback','Font Awesome'",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback','FontAwesome'"
+}
