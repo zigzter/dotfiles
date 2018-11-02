@@ -7,38 +7,70 @@ border_bottom=3
 
 [mediaplayer]
 command=~/.config/i3blocks/mediaplayer
+label= 
 instance=spotify
 interval=5
 signal=10
+border=#b58900
+
+[volume-pulseaudio]
+command=~/.config/i3blocks/volume-pulseaudio
+interval=once
+signal=1
+border=#cb4b16
+#SCONTROL=[determined automatically]
+##exposed format variables: ${SYMB}, ${VOL}, ${INDEX}, ${NAME}
+#LONG_FORMAT="${SYMB} ${VOL}% [${INDEX}:${NAME}]"
+#SHORT_FORMAT="${SYMB} ${VOL}% [${INDEX}]"
+#AUDIO_HIGH_SYMBOL='  '
+#AUDIO_MED_THRESH=50
+#AUDIO_MED_SYMBOL='  '
+# AUDIO_LOW_THRESH=0
+#AUDIO_LOW_SYMBOL='  '
+#AUDIO_DELTA=5
+#DEFAULT_COLOR="#ffffff"
+
+
+[iface]
+command=~/.config/i3blocks/iface
+label=wlp2s0:
+#IFACE=wlan0
+#ADDRESS_FAMILY=inet6?
+color=#FFFFFF
+interval=60
+border=#dc322f
 
 [temperature]
 command=~/.config/i3blocks/temperature
 label=
 markup=pango
 interval=10
-border=#cb4b16
+border=#d33682
 
 [memory]
 command=~/.config/i3blocks/memory
 label=
 markup=pango
 interval=30
-border=#859900
+border=#6c71c4
 
 [cpu_usage]
 command=~/.config/i3blocks/cpu_usage
 interval=10
 label=
-min_width=CPU: 100.00%
-border=#2aa198
+# min_width=CPU: 100.00%
+#T_WARN=50
+#T_CRIT=80
+#DECIMALS=2
+border=#268bd2
 
 [battery2]
 command=~/.config/i3blocks/battery2
 markup=pango
 interval=30
-border=#d33682
+border=#2aa198
 
 [time]
 command=date '+%Y-%m-%d %r'
 interval=5
-border=#eee8d5
+border=#859900

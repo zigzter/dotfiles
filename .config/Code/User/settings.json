@@ -1,7 +1,6 @@
 {
     "window.zoomLevel": 0,
     "editor.hover.sticky": false,
-    "window.titleBarStyle": "custom",
     "files.autoSave": "onFocusChange",
     "editor.wordWrap": "on",
     "workbench.iconTheme": "eq-material-theme-icons",
@@ -22,5 +21,6 @@
     "terminal.integrated.fontFamily": "Meslo LG M DZ for Powerline",
     "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback','Font Awesome'",
     "javascript.updateImportsOnFileMove.enabled": "always",
-    "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback','FontAwesome'"
+    "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback','FontAwesome'",
+    "window.menuBarVisibility": "toggle"
 }
