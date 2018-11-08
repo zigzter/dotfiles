@@ -22,5 +22,7 @@
     "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback','Font Awesome'",
     "javascript.updateImportsOnFileMove.enabled": "always",
     "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback','FontAwesome'",
-    "window.menuBarVisibility": "toggle"
+    "window.menuBarVisibility": "toggle",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
 }

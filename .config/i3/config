@@ -184,3 +184,7 @@ bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks 
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
+
+# Tap to click
+exec --no-startup-id xinput set-prop 12 295 1
+
