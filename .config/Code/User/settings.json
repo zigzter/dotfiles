@@ -3,7 +3,7 @@
     "editor.hover.sticky": false,
     "files.autoSave": "onFocusChange",
     "editor.wordWrap": "on",
-    "workbench.iconTheme": "eq-material-theme-icons",
+    "workbench.iconTheme": "eq-material-theme-icons-light",
     "materialTheme.fixIconsRunning": false,
     "breadcrumbs.enabled": false,
     "explorer.confirmDragAndDrop": false,
@@ -15,7 +15,7 @@
     "[ruby]": {
         "editor.tabSize": 2
     },
-    "editor.minimap.enabled": false,
+    "editor.minimap.enabled": true,
     "workbench.activityBar.visible": false,
     "terminal.integrated.drawBoldTextInBrightColors": false,
     "terminal.integrated.fontFamily": "Meslo LG M DZ for Powerline",
@@ -50,5 +50,6 @@
     },
     "workbench.colorTheme": "Material Theme",
     "editor.selectionClipboard": false,
-    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true
 }
