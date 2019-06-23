@@ -166,12 +166,13 @@ smart_borders on
 
 exec_always --no-startup-id feh --no-fehbg --bg-scale ~/Downloads/wallhaven-618622.jpg
 
-exec --no-startup-id "i3-msg 'workspace 2:  Coding; append_layout /home/ziggy/.i3/workspace-2.json'"
+# exec --no-startup-id "i3-msg 'workspace 2:  Coding; append_layout /home/ziggy/.i3/workspace-2.json'"
 
 for_window [class="Spotify"] move to workspace "10:  Spotify"
 
-# Wifi
+# Wifi / bluetooth
 exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
 
 # Clone to projector
 bindsym $mod+o exec --no-startup-id xrandr --output HDMI-1 --mode 1920x1080 --same-as DP-1
@@ -186,5 +187,5 @@ bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -R
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
 
 # Tap to click
-exec --no-startup-id xinput set-prop 12 295 1
+exec --no-startup-id xinput set-prop 11 277 1
 

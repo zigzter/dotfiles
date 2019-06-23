@@ -36,7 +36,7 @@ ZSH_THEME="agnoster"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+#ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -68,6 +68,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+source ~/.bash_profile
 
 # User configuration
 
@@ -101,3 +102,5 @@ source $ZSH/oh-my-zsh.sh
 DEFAULT_USER=`whoami`
 
 export PATH=~/.npm-global/bin:$PATH
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

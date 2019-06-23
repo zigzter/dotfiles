@@ -5,10 +5,6 @@ border_left=0
 border_right=0
 border_bottom=3
 
-[commit]
-command=~/.config/i3blocks/commit
-interval=60
-
 [mediaplayer]
 command=~/.config/i3blocks/mediaplayer
 label= 
