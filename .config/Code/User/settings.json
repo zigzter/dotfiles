@@ -47,5 +47,7 @@
     },
     "workbench.colorTheme": "Material Theme",
     "editor.selectionClipboard": false,
-    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+    "javascript.validate.enable": false,
+    "workbench.iconTheme": "material-icon-theme",
 }
