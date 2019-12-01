@@ -1,6 +1,6 @@
 {
     "window.zoomLevel": 0,
-    "editor.hover.sticky": false,
+    "editor.hover.sticky": true,
     "files.autoSave": "onFocusChange",
     "editor.wordWrap": "on",
     "breadcrumbs.enabled": false,
@@ -13,15 +13,18 @@
     "[ruby]": {
         "editor.tabSize": 2
     },
-    "editor.minimap.enabled": true,
+    "editor.minimap.enabled": false,
     "workbench.activityBar.visible": true,
     "terminal.integrated.drawBoldTextInBrightColors": false,
     "terminal.integrated.fontFamily": "Meslo LG M DZ for Powerline",
     "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback','Font Awesome'",
     "javascript.updateImportsOnFileMove.enabled": "always",
     "window.menuBarVisibility": "toggle",
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true,
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.maxColumn": 200,
+    "editor.minimap.showSlider": "always",
+    "editor.cursorBlinking": "phase",
+    "files.trimTrailingWhitespace": true,
     "html.format.endWithNewline": true,
     "materialTheme.accent": "Orange",
     "workbench.colorCustomizations": {
@@ -50,4 +53,12 @@
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
     "javascript.validate.enable": false,
     "workbench.iconTheme": "material-icon-theme",
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+    ],
+    "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
+    "javascript.format.insertSpaceBeforeAndAfterBinaryOperators": false,
 }
