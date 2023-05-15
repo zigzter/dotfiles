@@ -22,5 +22,12 @@ return function(use)
     use({
         'sjl/vitality.vim'
     })
+    use({
+        "nvim-telescope/telescope-file-browser.nvim",
+        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    })
+    use({
+        "psliwka/vim-smoothie"
+    })
 end
 
