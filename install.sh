@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# This script is a WIP and probably doesn't work atm
 # Reminder: Make sure to download NetworkManager and setup network during Arch install
 
 echo "Updating system and installing packages..."
@@ -13,6 +14,15 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si --noconfirm
 cd ~
+
+# Install microcode
+if grep -q "Intel" /proc/cpuinfo; then
+    sudo pacman -S intel-ucode --noconfirm
+elif grep -q "AMD"; then
+    sudo pacman -S amd-ucode --noconfirm
+fi
+# Regen grub config to incorporate microcode
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Install Hyprland & Waybar
 sudo pacman -S hyprland waybar --noconfirm
