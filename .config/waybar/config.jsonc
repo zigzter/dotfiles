@@ -4,7 +4,7 @@
     "reload_style_on_change": true,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["sway/window"],
-    "modules-right": ["network", "pulseaudio", "battery", "clock", "tray", "custom/lock", "custom/power"],
+    "modules-right": ["network", "audio", "battery", "clock", "tray", "custom/lock", "custom/power"],
     "hyprland/workspaces": {
          "disable-scroll": true,
          "sort-by-name": true,
@@ -44,7 +44,7 @@
         "format-alt": "{icon}",
         "format-icons": ["", "",  "", "", "", "", "", "", "", "", "", ""]
     },
-    "pulseaudio": {
+    "audio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{icon} {volume}%",
         "format-muted": "",
@@ -55,7 +55,7 @@
     },
     "custom/lock": {
         "tooltip": false,
-        "on-click": "sh -c '(sleep 0.5s; swaylock -i ~/Downloads/shaded_landscape.jpeg --grace 0)' & disown",
+        "on-click": "sleep 0.5s; swaylock -i ~/Downloads/shaded_landscape.jpeg --grace 0 & disown",
         "format": "",
     },
     "custom/power": {
