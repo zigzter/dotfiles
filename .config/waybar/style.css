@@ -1,38 +1,40 @@
 @import "macchiato.css";
 
 * {
-  font-family: JetBrainsMono Nerd Font Mono;
-  font-size: 14px;
-  min-height: 0;
+    color: @lavender;
+    font-family: JetBrainsMono Nerd Font Mono;
+    font-size: 18px;
+    font-weight: bold;
+    min-height: 0;
 }
 
 #waybar {
-  background: transparent;
-  color: @text;
-  margin: 5px 5px;
+    background: transparent;
+    color: @text;
+    margin: 5px 5px;
 }
 
 #workspaces {
-  border-radius: 0.4rem;
-  margin: 4px;
-  background-color: @surface0;
-  margin-left: 1rem;
+    border-radius: 0.5rem;
+    margin: 4px;
+    background-color: @surface0;
+    margin-left: 1rem;
 }
 
 #workspaces button {
-  color: @lavender;
-  border-radius: 0.4rem;
-  padding: 0.2rem;
+    color: @base;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
 }
 
 #workspaces button.active {
-  color: @sky;
-  border-radius: 1rem;
+    color: @sky;
+    border-radius: 1rem;
 }
 
 #workspaces button:hover {
-  color: @sapphire;
-  border-radius: 1rem;
+    color: @mauve;
+    border-radius: 0.5rem;
 }
 
 #custom-music,
@@ -42,62 +44,56 @@
 #clock,
 #battery,
 #pulseaudio,
+#memory,
+#cpu,
 #custom-lock,
 #custom-power {
-  background-color: @surface0;
-  padding: 0.2rem 0.8rem;
-  margin: 5px 0;
-}
-
-#network {
-    border-radius: 0.4rem;
+    background-color: @surface0;
+    padding: 0.3rem 0.8rem;
+    margin: 5px 0;
 }
 
 #clock {
-  color: @blue;
-  border-radius: 0px 0.4rem 0.4rem 0px;
-  margin-right: 1rem;
+    color: @blue;
+    border-radius: 0.5rem;
+}
+
+#cpu {
+    border-radius: 0.5rem 0 0 0.5rem;
 }
 
 #battery {
-  color: @green;
+    color: @green;
 }
 
 #battery.charging {
-  color: @green;
+    color: @green;
 }
 
 #battery.warning:not(.charging) {
-  color: @red;
+    color: @red;
 }
 
 #backlight {
-  color: @yellow;
-}
-
-#backlight, #battery {
-    border-radius: 0;
+    color: @yellow;
 }
 
 #pulseaudio {
-  color: @maroon;
-  border-radius: 0.4rem 0px 0px 0.4rem;
-  margin-left: 1rem;
+    color: @maroon;
 }
 
 #custom-lock {
-    border-radius: 0.4rem 0px 0px 0.4rem;
+    border-radius: 0.5rem 0px 0px 0.5rem;
     color: @lavender;
 }
 
 #custom-power {
     margin-right: 1rem;
-    border-radius: 0px 0.4rem 0.4rem 0px;
+    border-radius: 0px 0.5rem 0.5rem 0px;
     color: @red;
 }
 
 #tray {
-  margin-right: 1rem;
-  border-radius: 1rem;
+    margin-right: 1rem;
+    border-radius: 1rem;
 }
-

@@ -2,10 +2,11 @@
 
 # This script is a WIP and probably doesn't work atm
 # Reminder: Make sure to download NetworkManager and setup network during Arch install
+# Also, install git and setup
 
 echo "Updating system and installing packages..."
 sudo pacman -Syu --noconfirm
-sudo pacman -S --noconfirm base-devel git zsh unzip base
+sudo pacman -S --noconfirm base-devel zsh unzip base
 
 # Install Yay
 echo "Installing Yay..."
@@ -30,7 +31,7 @@ sudo pacman -S hyprland waybar hyprpaper kitty qt5-wayland qt6-wayland --noconfi
 # Install more things
 sudo pacman -S --noconfirm openssh lspci dunst which firefox man-db man-pages \
     xclip bat btop pipewire pavucontrol ttf-font-awesome tmux ripgrep swaylock nodejs \
-    stow qt6-svg qt6-declarative fastfetch
+    stow qt6-svg qt6-declarative fastfetch postgresql-libs lsd
 
 yay -S neovim-git sddm-git
 
@@ -64,3 +65,7 @@ fc-cache -fv
 sudo pacman -S docker docker-compose --noconfirm
 sudo usermod -aG docker $USER
 sudo systemctl enable --now docker
+
+# Set up RVM
+curl -sSL https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm

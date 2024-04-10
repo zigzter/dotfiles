@@ -1,5 +1,7 @@
-width=750
+width=700
+location=middle
 height=400
+show=drun
 always_parse_args=true
 show_all=false
 term=kitty

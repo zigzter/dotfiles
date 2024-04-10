@@ -20,6 +20,8 @@ alias gn='git checkout -b'
 alias gc='git checkout'
 alias rbc='git rebase --continue'
 alias tma='tmux attach -t'
+alias ls='lsd'
+alias la='ls -lah'
 alias cat=bat
 alias vim=nvim
 
@@ -40,3 +42,6 @@ dei() {
     docker exec -it $id /bin/bash
 }
 
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

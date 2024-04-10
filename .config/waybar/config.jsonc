@@ -2,20 +2,30 @@
     "layer": "top",
     "position": "bottom",
     "reload_style_on_change": true,
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["network", "audio", "battery", "clock", "tray", "custom/lock", "custom/power"],
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "cpu",
+        "memory",
+        "network",
+        "audio",
+        "battery",
+        "custom/lock",
+        "custom/power"
+    ],
     "hyprland/workspaces": {
-         "disable-scroll": true,
-         "sort-by-name": true,
-         "format": " {icon} ",
-         "format-icons": {
-             "default": "",
-         },
-     },
-    "tray": {
-        "icon-size": 15,
-        "spacing": 10
+        "disable-scroll": true,
+        "sort-by-name": true,
+        "format": " {icon} ",
+        "format-icons": {
+            "1": "",
+            "2": "󱃖",
+            "default": ""
+        }
     },
     "sway/window": {
         "max-length": 50
@@ -23,7 +33,7 @@
     "network": {
         "format-wifi": "{ipaddr} ({signalStrength}%) ",
         "format-ethernet": "{ifname} ",
-        "format-disconnected": "", 
+        "format-disconnected": "",
         "max-length": 50,
         "on-click": "nm-applet --indicator"
     },
@@ -31,7 +41,13 @@
         "timezone": "America/Vancouver",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": " {:%d/%m/%Y}",
-        "format": " {:%H:%M}"
+        "format": " {:%a %d %b  %I:%M %p}"
+    },
+    "memory": {
+        "format": "{: >3}%"
+    },
+    "cpu": {
+        "format": "{usage: >3}%"
     },
     "battery": {
         "states": {
@@ -42,20 +58,37 @@
         "format-charging": "",
         "format-plugged": "",
         "format-alt": "{icon}",
-        "format-icons": ["", "",  "", "", "", "", "", "", "", "", "", ""]
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
     "audio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{icon} {volume}%",
         "format-muted": "",
         "format-icons": {
-            "default": ["", "", " "]
+            "default": [
+                "",
+                "",
+                " "
+            ]
         },
         "on-click": "pavucontrol"
     },
     "custom/lock": {
         "tooltip": false,
-        "on-click": "sleep 0.5s; swaylock -i ~/Downloads/shaded_landscape.jpeg --grace 0 & disown",
+        "on-click": "swaylock -i ~/Downloads/shaded_landscape.jpeg --grace 0",
         "format": "",
     },
     "custom/power": {
@@ -64,4 +97,3 @@
         "format": "襤"
     }
 }
-
