@@ -37,29 +37,38 @@
     border-radius: 0.5rem;
 }
 
+#pulseaudio,
 #custom-music,
 #tray,
 #backlight,
 #network,
 #clock,
 #battery,
-#pulseaudio,
 #memory,
 #cpu,
 #custom-lock,
 #custom-power {
     background-color: @surface0;
     padding: 0.3rem 0.8rem;
-    margin: 5px 0;
+    margin: 5px 5px;
 }
 
 #clock {
-    color: @blue;
+    color: @teal;
     border-radius: 0.5rem;
 }
 
+#memory {
+    color: @teal;
+}
+
 #cpu {
+    color: @teal;
     border-radius: 0.5rem 0 0 0.5rem;
+}
+
+#network {
+    color: @green;
 }
 
 #battery {
