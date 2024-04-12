@@ -12,3 +12,9 @@ Some features:
 - Terminal: `kitty`
 - Launcher: `wofi`
 - Editor: `neovim` (btw)
+
+## Install process
+[Install Arch](https://wiki.archlinux.org/title/Installation_guide)
+- When running the `pacstrap` command, add `${amd | intel}-ucode`, `networkmanager`, `base-devel`
+- Once chrooted into install, enable NetworkManager with `systemctl enable --now NetworkManager.service`
+Run `install.sh`

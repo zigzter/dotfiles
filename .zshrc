@@ -20,6 +20,7 @@ alias ls='lsd'
 alias la='ls -lah'
 alias cat=bat
 alias vim=nvim
+alias ff=fastfetch
 
 # Easier git branch search
 bs() {

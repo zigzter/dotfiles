@@ -4,9 +4,8 @@
 # Reminder: Make sure to download NetworkManager and setup network during Arch install
 # Also, install git and setup
 
-echo "Updating system and installing packages..."
+echo "Updating system..."
 sudo pacman -Syu --noconfirm
-sudo pacman -S --noconfirm base-devel zsh unzip base
 
 # Install Yay
 echo "Installing Yay..."
@@ -16,24 +15,15 @@ cd yay
 makepkg -si --noconfirm
 cd ~
 
-# Install microcode
-if grep -q "Intel" /proc/cpuinfo; then
-    sudo pacman -S intel-ucode --noconfirm
-elif grep -q "AMD"; then
-    sudo pacman -S amd-ucode --noconfirm
-fi
-# Regen grub config to incorporate microcode
-sudo grub-mkconfig -o /boot/grub/grub.cfg
-
 # Install Hyprland & Waybar
-sudo pacman -S hyprland waybar hyprpaper kitty qt5-wayland qt6-wayland --noconfirm
+sudo pacman -S --noconfirm hyprland waybar hyprpaper kitty qt5-wayland qt6-wayland
 
 # Install more things
-sudo pacman -S --noconfirm openssh lspci dunst which firefox man-db man-pages \
+sudo pacman -S --noconfirm openssh pciutils dunst which firefox man-db man-pages \
     xclip bat btop pipewire pavucontrol ttf-font-awesome tmux ripgrep swaylock nodejs \
-    stow qt6-svg qt6-declarative fastfetch postgresql-libs lsd
+    stow qt6-svg qt6-declarative fastfetch postgresql-libs lsd neovim
 
-yay -S neovim-git sddm-git
+yay -S sddm-git
 
 # Detect and install GPU drivers
 GPU=$(lspci | grep -E "VGA|3D")
@@ -56,16 +46,19 @@ fi
 echo "Downloading and installing fonts..."
 mkdir -p ~/.local/share/fonts
 mkdir -p ~/Downloads/jetbrains
-curl -fLo https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.0/JetBrainsMono.zip
-unzip ~/Downloads/JetBrainsMono.zip -d ~/Downloads/jetbrains
+cd ~/Downloads/jetbrains
+curl -fLO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.0/JetBrainsMono.zip
+unzip JetBrainsMono.zip -d jetbrains
 mv ~/Downloads/jetbrains/* ~/.local/share/fonts/
+cd ~
 fc-cache -fv
 
 # Set up Docker
-sudo pacman -S docker docker-compose --noconfirm
+sudo pacman -S --noconfirm docker docker-compose
 sudo usermod -aG docker $USER
 sudo systemctl enable --now docker
 
 # Set up RVM
+gpg2 --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 curl -sSL https://get.rvm.io | bash -s stable
 source ~/.rvm/scripts/rvm
