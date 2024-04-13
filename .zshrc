@@ -11,7 +11,7 @@ fi
 # Aliases
 alias vim=nvim
 alias gs='git status'
-alias glo='git log --continue'
+alias glo='git log --oneline'
 alias gn='git checkout -b'
 alias gc='git checkout'
 alias rbc='git rebase --continue'
@@ -39,7 +39,15 @@ dei() {
     docker exec -it $id /bin/bash
 }
 
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+export HISTFILE="$ZDOTDIR/.zhistory"    # History filepath
+export HISTSIZE=10000                   # Maximum events for internal history
+export SAVEHIST=10000                   # Maximum events in history file
+setopt HIST_SAVE_NO_DUPS
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin:/bin/rg"
 source ~/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
