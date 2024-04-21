@@ -21,6 +21,9 @@ alias la='ls -lah'
 alias cat=bat
 alias vim=nvim
 alias ff=fastfetch
+alias se='SUDO_EDITOR=nvim sudoedit'
+
+bindkey '^R' history-incremental-search-backward
 
 # Easier git branch search
 bs() {
@@ -48,6 +51,6 @@ export SAVEHIST=10000                   # Maximum events in history file
 setopt HIST_SAVE_NO_DUPS
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin:/bin/rg"
+export PATH="$PATH:$HOME/.rvm/bin:/bin/rg:/opt/cuda/bin/nvcc"
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
