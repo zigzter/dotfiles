@@ -34,6 +34,7 @@ return {
         vim.keymap.set("n", "<leader>ss", builtin.lsp_document_symbols, { desc = "[S]ocument [S]ymbols" })
         vim.keymap.set("n", "<leader>lr", builtin.lsp_references, { desc = "[L]ist LSP [R]eferences" })
         vim.keymap.set("n", "<leader>sc", builtin.git_commits, { desc = "[S]earch [C]ommits" })
+        vim.keymap.set("n", "<leader>gc", builtin.git_status, { desc = "[G]it [C]hanges" })
         vim.keymap.set("n", "<leader>sn", function()
             builtin.find_files({ cwd = vim.fn.stdpath("config") })
         end, { desc = "[S]earch [N]eovim config" })
