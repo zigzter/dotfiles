@@ -58,7 +58,7 @@ export VISUAL="nvim"
 
 bindkey '^R' history-incremental-search-backward
 
-export HISTFILE="$ZDOTDIR/.zhistory"    # History filepath
+export HISTFILE="$HOME/.zhistory"       # History filepath
 export HISTSIZE=10000                   # Maximum events for internal history
 export SAVEHIST=10000                   # Maximum events in history file
 export HISTDUP=erase
