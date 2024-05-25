@@ -21,7 +21,7 @@ sudo pacman -S --noconfirm hyprland waybar hyprpaper kitty qt5-wayland qt6-wayla
 # Install more things
 sudo pacman -S --noconfirm openssh pciutils dunst which firefox man-db man-pages \
     xclip bat btop pipewire pavucontrol ttf-font-awesome tmux ripgrep swaylock nodejs \
-    stow qt6-svg qt6-declarative fastfetch postgresql-libs lsd neovim
+    stow qt6-svg qt6-declarative fastfetch postgresql-libs lsd neovim fzf
 
 yay -S sddm-git
 
