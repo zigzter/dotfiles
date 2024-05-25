@@ -1,16 +1,17 @@
 # My dotfiles
 
-Requires `stow`. Only tested on Arch Linux (btw).
+Requires `stow`. Only tested on Arch Linux (btw). Split between my laptop and desktop setups.
 
 1. Clone repo
-2. CD in, and run `stow .`
+2. CD in, and run `stow common` and `stow ${desktop || laptop}`
 
 Some features:
-- Window manager: `hyprland`
-- Status bar: `waybar`
-- Logout menu: `wlogout`
+- Laptop Window manager: `hyprland`
+- Laptop Status bar: `waybar`
+- Laptop Logout menu: `wlogout`
+- Laptop Launcher: `wofi`
+- Desktop DE: `kde plasma`
 - Terminal: `kitty`
-- Launcher: `wofi`
 - Editor: `neovim` (btw)
 
 ## Install process
