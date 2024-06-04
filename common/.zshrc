@@ -35,6 +35,7 @@ alias cat=bat
 alias vim=nvim
 alias ff=fastfetch
 alias se='SUDO_EDITOR=nvim sudoedit'
+alias syu='sudo pacman -Syu'
 
 # Easier git branch search
 bs() {
