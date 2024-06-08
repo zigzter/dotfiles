@@ -5,6 +5,9 @@
         "closer": "p:os",
         "pink": "#F5BDE6",
         "lavender": "#B7BDF8",
+        "teal": "#8BD5CA",
+        "red": "#ED8796",
+        "green": "#A6DA95",
         "blue": "#8AADF4"
     },
     "blocks": [
@@ -12,15 +15,9 @@
             "alignment": "left",
             "segments": [
                 {
-                    "foreground": "p:blue",
-                    "style": "plain",
-                    "template": "{{ .UserName }}@{{ .HostName }} ",
-                    "type": "session"
-                },
-                {
                     "foreground": "p:pink",
                     "properties": {
-                        "folder_icon": "..\ue5fe..",
+                        "folder_icon": "..",
                         "home_icon": "~",
                         "style": "agnoster_short"
                     },
@@ -57,12 +54,12 @@
             "segments": [
                 {
                     "style": "plain",
-                    "foreground": "p:closer",
-                    "template": "\uf105",
+                    "foreground": "p:teal",
+                    "template": "󰅂",
                     "type": "text",
                     "foreground_templates": [
-                        "{{ if gt .Code 0}}red{{end}}",
-                        "{{ if eq .Code 0}}magenta{{end}}"
+                        "{{ if gt .Code 0}}p:red{{end}}",
+                        "{{ if eq .Code 0}}p:lavender{{end}}"
                     ]
                 }
             ]
@@ -72,6 +69,18 @@
             "type": "rprompt",
             "overflow": "hidden",
             "segments": [
+                {
+                    "type": "docker",
+                    "style": "plain",
+                    "foreground": "p:blue",
+                    "template": "󰡨 {{ .Context }} "
+                },
+                {
+                    "type": "go",
+                    "style": "plain",
+                    "foreground": "p:blue",
+                    "template": " {{ .Full }} "
+                },
                 {
                     "type": "executiontime",
                     "style": "plain",
@@ -86,17 +95,17 @@
     ],
     "transient_prompt": {
         "background": "transparent",
-        "foreground": "p:pink",
-        "template": " ",
+        "foreground": "p:teal",
+        "template": "󰅂 ",
         "foreground_templates": [
-            "{{ if gt .Code 0}}red{{end}}",
-            "{{ if eq .Code 0}}magenta{{end}}"
+            "{{ if gt .Code 0}}p:red{{end}}",
+            "{{ if eq .Code 0}}p:lavender{{end}}"
         ]
     },
     "secondary_prompt": {
-        "foreground": "p:pink",
+        "foreground": "p:teal",
         "background": "transparent",
-        "template": " "
+        "template": "󰅂󰅂 "
     },
     "final_space": true,
     "version": 2
