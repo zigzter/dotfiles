@@ -55,7 +55,7 @@
                 {
                     "style": "plain",
                     "foreground": "p:teal",
-                    "template": "󰅂",
+                    "template": "",
                     "type": "text",
                     "foreground_templates": [
                         "{{ if gt .Code 0}}p:red{{end}}",
@@ -96,7 +96,7 @@
     "transient_prompt": {
         "background": "transparent",
         "foreground": "p:teal",
-        "template": "󰅂 ",
+        "template": " ",
         "foreground_templates": [
             "{{ if gt .Code 0}}p:red{{end}}",
             "{{ if eq .Code 0}}p:lavender{{end}}"
@@ -105,7 +105,7 @@
     "secondary_prompt": {
         "foreground": "p:teal",
         "background": "transparent",
-        "template": "󰅂󰅂 "
+        "template": " "
     },
     "final_space": true,
     "version": 2

@@ -11,6 +11,7 @@ Rows=1
 Active=true
 LatitudeAuto=49.36
 LongitudeAuto=-122.98
+NightTemperature=3700
 
 [Plugins]
 shakecursorEnabled=true
