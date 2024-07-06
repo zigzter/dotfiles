@@ -19,10 +19,16 @@ shakecursorEnabled=true
 [Tiling]
 padding=4
 
+[Tiling][0cb7aa54-ad8b-56c8-a31b-4bb61954e06f]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][1b37fb2e-ca39-57be-8a36-518594480098]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][1de9e5bb-2ea1-5a0d-8101-b5ba3bee884a]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][cda52e84-e598-5ec9-b8e5-40361373375a]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][e41afb89-6b1d-58c6-998e-9a6fa9b503e6]
