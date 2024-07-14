@@ -72,6 +72,10 @@ return {
             cmd = { "gopls", "--remote=auto" },
             on_attach = on_attach,
         })
+        lspconfig.pyright.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
         lspconfig.html.setup({
             capabilities = capabilities,
             on_attach = on_attach,
