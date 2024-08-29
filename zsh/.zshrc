@@ -26,6 +26,7 @@ alias glo='git log --oneline'
 alias gn='git checkout -b'
 alias gc='git checkout'
 alias rbc='git rebase --continue'
+alias gcv='git commit -v'
 alias tma='tmux attach -t'
 alias ls='lsd'
 alias la='ls -lah'
@@ -34,6 +35,12 @@ alias vim=nvim
 alias ff=fastfetch
 alias se='SUDO_EDITOR=nvim sudoedit'
 alias syu='sudo pacman -Syu'
+alias pacclean='sudo paccache -rk 2'
+
+# Get top 5 size offenders
+sizing() {
+    du -hs $1 | sort -rh | head -5
+}
 
 # Easier git branch search
 bs() {
