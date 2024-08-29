@@ -3,7 +3,7 @@
 Requires `stow`. Only tested on Arch Linux (btw). Split between my laptop and desktop setups.
 
 1. Clone repo
-2. CD in, and run `stow common` and `stow ${desktop || laptop}`
+2. CD in, and run `make` (If you're not me, you'll probably have to edit the Makefile with the appropriate machine names)
 
 Some features:
 - Laptop Window manager: `hyprland`
