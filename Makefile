@@ -1,4 +1,4 @@
-MACHINE := $(shell hostnamectl hostname)
+MACHINE := $(shell hostname 2>/dev/null || hostnamectl hostname 2>/dev/null)
 COMMON := nvim tmux zsh bat btop fastfetch kitty ohmyposh
 
 # Machine is my laptop
