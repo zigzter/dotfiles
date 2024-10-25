@@ -32,6 +32,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.api.nvim_create_autocmd({ "FocusLost" }, {
+    desc = "autosave",
+    pattern = "*",
+    command = "silent! update",
+})
+
 -- set 50 and 72 char limit columns on gitcommits
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "gitcommit",

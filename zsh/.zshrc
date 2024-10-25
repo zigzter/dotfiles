@@ -22,7 +22,7 @@ autoload -U compinit && compinit
 # Aliases
 alias vim=nvim
 alias gs='git status'
-alias glo='git log --oneline'
+alias glo='git log --graph --all --oneline'
 alias gn='git checkout -b'
 alias gc='git checkout'
 alias rbc='git rebase --continue'
@@ -81,7 +81,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd $realpath'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin:/bin/rg:/opt/nvim-linux64/bin"
+export PATH="$PATH:$HOME/.rvm/bin:/bin/rg:/opt/nvim-linux64/bin:/usr/local/go/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -89,3 +89,9 @@ if command -v pyenv 1>/dev/null 2>&1; then
    eval "$(pyenv init -)" 
 fi
 eval "$(fzf --zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
