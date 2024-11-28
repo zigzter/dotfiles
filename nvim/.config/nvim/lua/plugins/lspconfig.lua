@@ -102,5 +102,11 @@ return {
             capabilities = capabilities,
             on_attach = on_attach,
         })
+        lspconfig.omnisharp.setup({
+            cmd = { "omnisharp" },
+            root_dir = lspconfig.util.root_pattern("*.csproj", "*.sln"),
+            capabilities = capabilities,
+            on_attach = on_attach
+        })
     end,
 }
