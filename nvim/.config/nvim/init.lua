@@ -18,6 +18,8 @@ vim.opt.updatetime = 50
 
 vim.opt.scrolloff = 5
 
+vim.opt.laststatus = 0
+
 -- lazy.nvim setup
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
