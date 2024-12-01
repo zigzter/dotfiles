@@ -28,7 +28,7 @@ return {
         require("ibl").setup({
             scope = { highlight = highlight },
             exclude = {
-                buftypes = { "nofile" },
+                filetypes = { "dashboard" },
             },
         })
 

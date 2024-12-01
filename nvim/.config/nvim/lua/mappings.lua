@@ -2,8 +2,6 @@ local builtin = require("telescope.builtin")
 local harpoon = require("harpoon")
 local dap = require("dap")
 
-vim.g.mapleader = " "
-
 local function nmap(lhs, rhs, desc) vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, desc = desc }) end
 
 -- Quickfix

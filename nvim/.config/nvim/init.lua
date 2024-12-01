@@ -18,6 +18,8 @@ vim.opt.scrolloff = 5
 
 vim.opt.laststatus = 0
 
+vim.g.mapleader = " "
+
 -- lazy.nvim setup
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
