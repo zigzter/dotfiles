@@ -18,20 +18,26 @@ return {
                     hidden = true,
                 },
                 live_grep = {
-                    additional_args = function(opts)
-                        return { "--hidden" }
-                    end
-                }
+                    additional_args = function(opts) return { "--hidden" } end,
+                },
             },
         })
-        vim.keymap.set("n", "<leader>/", function()
-            builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-                winblend = 10,
-                previewer = false,
-            }))
-        end, { desc = "[/] Fuzzily search in current buffer" })
-        vim.keymap.set("n", "<leader>sn", function()
-            builtin.find_files({ cwd = vim.fn.stdpath("config") })
-        end, { desc = "[S]earch [N]eovim config" })
+        vim.keymap.set(
+            "n",
+            "<leader>/",
+            function()
+                builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+                    winblend = 10,
+                    previewer = false,
+                }))
+            end,
+            { desc = "[/] Fuzzily search in current buffer" }
+        )
+        vim.keymap.set(
+            "n",
+            "<leader>sn",
+            function() builtin.find_files({ cwd = vim.fn.stdpath("config") }) end,
+            { desc = "[S]earch [N]eovim config" }
+        )
     end,
 }

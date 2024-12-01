@@ -3,9 +3,7 @@ local harpoon = require("harpoon")
 
 vim.g.mapleader = " "
 
-local function nmap(lhs, rhs, desc)
-	vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, desc = desc })
-end
+local function nmap(lhs, rhs, desc) vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, desc = desc }) end
 
 -- Quickfix
 nmap("<leader>j", "<cmd>cnext<CR>zz", "Next in quickfix list")
@@ -33,24 +31,10 @@ nmap("<leader>gc", ":tab Git commit -v<cr>", "[G]it [C]ommit")
 nmap("<leader>gp", ":Git push<cr>", "[G]it [P]ush")
 
 -- Harpoon
-nmap("<leader>a", function()
-	harpoon:list():append()
-end)
-nmap("<leader>v", function()
-	harpoon.ui:toggle_quick_menu(harpoon:list())
-end)
-nmap("<leader>q", function()
-	harpoon:list():select(1)
-end)
-nmap("<leader>w", function()
-	harpoon:list():select(2)
-end)
-nmap("<leader>e", function()
-	harpoon:list():select(3)
-end)
-nmap("<leader>r", function()
-	harpoon:list():select(4)
-end)
-nmap("<leader>t", function()
-	harpoon:list():select(5)
-end)
+nmap("<leader>a", function() harpoon:list():append() end)
+nmap("<leader>v", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+nmap("<leader>q", function() harpoon:list():select(1) end)
+nmap("<leader>w", function() harpoon:list():select(2) end)
+nmap("<leader>e", function() harpoon:list():select(3) end)
+nmap("<leader>r", function() harpoon:list():select(4) end)
+nmap("<leader>t", function() harpoon:list():select(5) end)

@@ -30,7 +30,7 @@ return {
                 type = "server",
                 port = "${port}",
                 executable = {
-                    command = vim.fn.stdpath("data") .. '/mason/bin/dlv',
+                    command = vim.fn.stdpath("data") .. "/mason/bin/dlv",
                     args = { "dap", "-l", "127.0.0.1:${port}" },
                 },
             }
@@ -74,27 +74,28 @@ return {
                     name = "Launch",
                     request = "launch",
                     program = function()
-                        return vim.fn.input("Path to dll: ",
-                            vim.fn.getcwd() .. "~/projects/vitae/bin/Debug/net9.0/vitae.dll", "file")
+                        return vim.fn.input(
+                            "Path to dll: ",
+                            vim.fn.getcwd() .. "~/projects/vitae/bin/Debug/net9.0/vitae.dll",
+                            "file"
+                        )
                     end,
                 },
             }
 
-            vim.fn.sign_define('DapBreakpoint', { text = '󰃤' })
+            vim.fn.sign_define("DapBreakpoint", { text = "󰃤" })
             vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "[d]ebug [c]ontinue" })
             vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "toggle [d]ebug [b]reakpoint" })
             vim.keymap.set("n", "<leader>dn", dap.step_over, { desc = "[d]ebug [n]ext (step over)" })
             vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "[d]ebug [i]nto (step into)" })
             vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "[d]ebug [o]ut (step out)" })
-            vim.keymap.set("n", "<leader>dC", function()
-                dap.clear_breakpoints()
-            end, { desc = "[C]lear breakpoints" })
+            vim.keymap.set("n", "<leader>dC", function() dap.clear_breakpoints() end, { desc = "[C]lear breakpoints" })
             vim.keymap.set("n", "<leader>de", function()
                 dap.clear_breakpoints()
                 dap.terminate()
                 vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
             end, { desc = "[d]ebug [e]xit" })
-        end
+        end,
     },
     {
         "rcarriga/nvim-dap-ui",
@@ -103,16 +104,10 @@ return {
             local dap = require("dap")
             local dapui = require("dapui")
             dapui.setup()
-            dap.listeners.after.event_initialized["dapui_config"] = function()
-                dapui.open()
-            end
-            dap.listeners.before.event_terminated["dapui_config"] = function()
-                dapui.close()
-            end
-            dap.listeners.before.event_exited["dapui_config"] = function()
-                dapui.close()
-            end
-        end
+            dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
+            dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
+            dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
+        end,
     },
     {
         "jay-babu/mason-nvim-dap.nvim",
@@ -120,5 +115,5 @@ return {
             automatic_setup = true,
             handlers = {},
         },
-    }
+    },
 }
