@@ -130,5 +130,9 @@ return {
             capabilities = capabilities,
             on_attach = on_attach,
         })
+        lspconfig.denols.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
     end,
 }

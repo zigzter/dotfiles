@@ -83,6 +83,25 @@ return {
                 },
             }
 
+            -- Deno
+            dap.adapters.deno = {
+                type = "server",
+                host = "127.0.0.1",
+                port = 9229,
+            }
+
+            dap.configurations.typescript = {
+                {
+                    type = "deno",
+                    request = "launch",
+                    name = "Launch Deno File",
+                    program = "${file}",
+                    cwd = "${workspaceFolder}",
+                    runtimeArgs = { "run", "--inspect-brk", "--allow-all" },
+                    attachSimplePort = 9229,
+                },
+            }
+
             vim.fn.sign_define("DapBreakpoint", { text = "󰃤" })
         end,
     },
