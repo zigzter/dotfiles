@@ -58,6 +58,8 @@ return {
             settings = {
                 implicitProjectConfiguration = { checkJs = true },
             },
+            single_file_support = false,
+            root_dir = lspconfig.util.root_pattern("package.json"),
         })
         lspconfig.cssls.setup({
             on_attach = on_attach,
@@ -133,6 +135,7 @@ return {
         lspconfig.denols.setup({
             capabilities = capabilities,
             on_attach = on_attach,
+            root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
         })
     end,
 }
