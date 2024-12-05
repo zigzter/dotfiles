@@ -71,3 +71,6 @@ nmap("<leader>de", function()
     dap.terminate()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
 end, "[d]ebug [e]xit")
+
+-- Neo-tree
+nmap("<leader>fb", ":Neotree toggle float<CR>", "[f]ile [b]rowser (neo-tree)")
