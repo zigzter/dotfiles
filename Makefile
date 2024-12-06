@@ -5,7 +5,7 @@ COMMON := nvim tmux zsh bat btop fastfetch kitty ohmyposh
 ifeq ($(MACHINE), MADVILLAIN)
     CONFIGS = dunst hypr swaylock systemd waybar wofi
 # Machine is my desktop
-else ifeq ($(MACHINE), DANGERDOOM)
+else ifeq ($(MACHINE), ENDEAVOUR)
 else
     $(error Unknown machine type)
 endif

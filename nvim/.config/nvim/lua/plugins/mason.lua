@@ -18,7 +18,7 @@ return {
         mason_lspconfig.setup({
             ensure_installed = {
                 "cssls",
-                "tsserver",
+                "ts_ls",
                 "dockerls",
                 "eslint",
                 "gopls",
