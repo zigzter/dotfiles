@@ -17,6 +17,7 @@ nmap("<leader>sh", builtin.help_tags, "[s]earch [h]elp")
 nmap("<leader>sk", builtin.keymaps, "[s]earch [k]eymaps")
 nmap("<leader>ss", builtin.lsp_document_symbols, "[s]earch [s]ymbols")
 nmap("<leader>lr", builtin.lsp_references, "[l]ist lsp [r]eferences")
+nmap("<leader>ls", builtin.resume, "[l]ast [s]earch")
 nmap("<leader>sc", builtin.git_commits, "[s]earch [c]ommits")
 nmap("<leader>gc", builtin.git_status, "[g]it [c]hanges")
 nmap(

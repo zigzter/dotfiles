@@ -1,3 +1,6 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.opt.rnu = true
 
 vim.opt.tabstop = 4
@@ -17,8 +20,6 @@ vim.opt.updatetime = 50
 vim.opt.scrolloff = 5
 
 vim.opt.laststatus = 0
-
-vim.g.mapleader = " "
 
 -- lazy.nvim setup
 
