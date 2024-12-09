@@ -24,8 +24,11 @@ nmap(
     "<leader>/",
     function()
         builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-            winblend = 10,
             previewer = false,
+            layout_config = {
+                width = 0.8,
+                height = 0.6,
+            },
         }))
     end,
     "[/] Fuzzily search in current buffer"
@@ -36,7 +39,7 @@ nmap("<leader>sn", function() builtin.find_files({ cwd = vim.fn.stdpath("config"
 nmap("<leader>gs", ":Git<cr>", "[g]it [s]tatus")
 nmap("<leader>gb", ":Git blame<cr>", "[g]it [b]lame")
 nmap("<leader>gd", ":Gvdiffsplit<cr>", "[g]it [d]iff")
-nmap("<leader>gl", ":Git log<cr>", "[g]it [l]og")
+nmap("<leader>gl", ":Git log -- %<cr>", "[g]it [l]og (current file)")
 nmap("<leader>ga", ":Git add %<cr>", "[g]it [a]dd")
 nmap("<leader>gc", ":tab Git commit -v<cr>", "[g]it [c]ommit")
 nmap("<leader>gp", ":Git push<cr>", "[g]it [p]ush")
@@ -75,3 +78,6 @@ end, "[d]ebug [e]xit")
 
 -- Neo-tree
 nmap("<leader>fb", ":Neotree toggle float<CR>", "[f]ile [b]rowser (neo-tree)")
+
+-- Misc
+nmap("<leader>co", ":only<CR>", "[c]lose [o]ther splits")

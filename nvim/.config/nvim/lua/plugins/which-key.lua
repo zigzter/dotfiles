@@ -1,3 +1,4 @@
+-- Show which keymaps are available following keys
 return {
     "folke/which-key.nvim",
     event = "VeryLazy",

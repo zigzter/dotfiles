@@ -1,3 +1,4 @@
+-- Code action previewer
 return {
     "aznhe21/actions-preview.nvim",
     config = function()

@@ -1,3 +1,4 @@
+-- A collection of QoL plugins
 return {
     "echasnovski/mini.nvim",
     version = false,

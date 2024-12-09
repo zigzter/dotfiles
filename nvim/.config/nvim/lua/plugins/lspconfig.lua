@@ -1,3 +1,4 @@
+-- LSP
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -143,10 +144,10 @@ return {
             init_options = {
                 config = {
                     vetur = {
-                        ignoreProjectWarning = true
-                    }
-                }
-            }
+                        ignoreProjectWarning = true,
+                    },
+                },
+            },
         })
     end,
 }

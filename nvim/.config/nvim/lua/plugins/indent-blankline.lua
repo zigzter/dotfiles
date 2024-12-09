@@ -1,3 +1,4 @@
+-- Show lines between opening and closing brackets/blocks
 return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",

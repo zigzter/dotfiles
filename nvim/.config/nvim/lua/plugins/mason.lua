@@ -1,3 +1,4 @@
+-- Plugin manager for LSPs, linters and formatters
 return {
     "williamboman/mason.nvim",
     dependencies = {

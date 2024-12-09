@@ -1,3 +1,4 @@
+-- Maintain a list of files to quickly access
 return {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",

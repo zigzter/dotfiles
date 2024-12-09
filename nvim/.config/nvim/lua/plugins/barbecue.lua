@@ -1,3 +1,4 @@
+-- Breadcrumbs
 return {
     "utilyre/barbecue.nvim",
     dependencies = {

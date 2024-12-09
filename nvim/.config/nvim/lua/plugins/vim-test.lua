@@ -1,3 +1,4 @@
+-- Run tests from nvim
 return {
     "vim-test/vim-test",
     config = function()

@@ -1,3 +1,4 @@
+-- Allows fast navigation and treesitter based selection
 return {
     "folke/flash.nvim",
     event = "VeryLazy",
