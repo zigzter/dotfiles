@@ -36,6 +36,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Save when focus is lost
 vim.api.nvim_create_autocmd({ "FocusLost" }, {
     desc = "autosave",
     pattern = "*",
