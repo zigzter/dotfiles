@@ -8,6 +8,10 @@ return {
         "MunifTanjim/nui.nvim",
     },
     opts = {
+        source_selector = {
+            winbar = true,
+        },
+        popup_border_style = "rounded",
         filesystem = {
             use_libuv_file_watcher = true,
             filtered_items = {
