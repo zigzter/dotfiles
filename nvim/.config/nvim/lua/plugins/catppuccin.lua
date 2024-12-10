@@ -21,5 +21,8 @@ return {
                 treesitter = true,
             },
         })
+        local colors = require("catppuccin.palettes").get_palette()
+        vim.api.nvim_set_hl(0, "SnacksIndentInactive", { fg = colors.surface0 })
+        vim.api.nvim_set_hl(0, "SnacksIndentActive", { fg = colors.text })
     end,
 }

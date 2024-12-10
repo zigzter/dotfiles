@@ -10,5 +10,15 @@ return {
         dashboard = {},
         bigfile = {},
         notifier = {},
+        indent = {
+            indent = {
+                only_current = true,
+                hl = "SnacksIndentInactive"
+            },
+            scope = {
+                hl = "SnacksIndentActive"
+            }
+        },
+        scroll = {},
     },
 }
