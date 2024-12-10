@@ -19,7 +19,7 @@ nmap("<leader>ss", builtin.lsp_document_symbols, "[s]earch [s]ymbols")
 nmap("<leader>lr", builtin.lsp_references, "[l]ist lsp [r]eferences")
 nmap("<leader>ls", builtin.resume, "[l]ast [s]earch")
 nmap("<leader>sc", builtin.git_commits, "[s]earch [c]ommits")
-nmap("<leader>gc", builtin.git_status, "[g]it [c]hanges")
+nmap("<leader>sd", builtin.git_status, "[s]earch [d]iff")
 nmap(
     "<leader>/",
     function()
