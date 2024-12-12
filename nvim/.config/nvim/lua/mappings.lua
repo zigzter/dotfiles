@@ -43,9 +43,10 @@ nmap("<leader>gl", ":Git log -- %<cr>", "[g]it [l]og (current file)")
 nmap("<leader>ga", ":Git add %<cr>", "[g]it [a]dd")
 nmap("<leader>gc", ":tab Git commit -v<cr>", "[g]it [c]ommit")
 nmap("<leader>gp", ":Git push<cr>", "[g]it [p]ush")
+nmap("<leader>gr", ":Git restore %<cr>", "[g]it [r]estore")
 
 -- Harpoon
-nmap("<leader>a", function() harpoon:list():append() end, "Harpoon add")
+nmap("<leader>a", function() harpoon:list():add() end, "Harpoon add")
 nmap("<leader>v", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, "View Harpoon list")
 nmap("<leader>q", function() harpoon:list():select(1) end, "Open Harpoon 1")
 nmap("<leader>w", function() harpoon:list():select(2) end, "Open Harpoon 2")
