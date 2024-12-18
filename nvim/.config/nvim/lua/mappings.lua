@@ -1,6 +1,8 @@
 local builtin = require("telescope.builtin")
 local harpoon = require("harpoon")
 local dap = require("dap")
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
 
 local function nmap(lhs, rhs, desc) vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, desc = desc }) end
 
@@ -18,21 +20,9 @@ nmap("<leader>sk", builtin.keymaps, "[s]earch [k]eymaps")
 nmap("<leader>ss", builtin.lsp_document_symbols, "[s]earch [s]ymbols")
 nmap("<leader>lr", builtin.lsp_references, "[l]ist lsp [r]eferences")
 nmap("<leader>ls", builtin.resume, "[l]ast [s]earch")
-nmap("<leader>sc", builtin.git_commits, "[s]earch [c]ommits")
+nmap("<leader>sc", builtin.git_bcommits, "[s]earch [c]ommits (current buffer)")
 nmap("<leader>sd", builtin.git_status, "[s]earch [d]iff")
-nmap(
-    "<leader>/",
-    function()
-        builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-            previewer = false,
-            layout_config = {
-                width = 0.8,
-                height = 0.6,
-            },
-        }))
-    end,
-    "[/] Fuzzily search in current buffer"
-)
+nmap("<leader>/", builtin.current_buffer_fuzzy_find, "[/] Fuzzily search in current buffer")
 nmap("<leader>sn", function() builtin.find_files({ cwd = vim.fn.stdpath("config") }) end, "[s]earch [n]eovim config")
 
 -- Vim Fugitive

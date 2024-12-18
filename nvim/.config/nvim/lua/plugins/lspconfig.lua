@@ -2,12 +2,12 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        "hrsh7th/cmp-nvim-lsp",
+        "saghen/blink.cmp",
     },
     event = { "BufReadPre", "BufNewFile" },
     config = function()
         local lspconfig = require("lspconfig")
-        local cmp_lsp = require("cmp_nvim_lsp")
+        local blink = require("blink.cmp")
         local map = vim.keymap
         local opts = { noremap = true, silent = true }
         local on_attach = function(client, bufnr)
@@ -42,7 +42,7 @@ return {
             opts.desc = "Restart LSP"
             map.set("n", "<leader>rs", ":LspRestart<CR>", opts)
         end
-        local capabilities = cmp_lsp.default_capabilities()
+        local capabilities = blink.get_lsp_capabilities()
 
         local signs = { Error = " ", Warn = " ", Hint = "󰌵 ", Info = "󰋼 " }
         for type, icon in pairs(signs) do
@@ -50,9 +50,7 @@ return {
             vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
         end
 
-        lspconfig.dockerls.setup({
-            capabilities = capabilities,
-        })
+        lspconfig.dockerls.setup({ capabilities = capabilities })
         lspconfig.ts_ls.setup({
             on_attach = on_attach,
             capabilities = capabilities,
@@ -62,30 +60,16 @@ return {
             single_file_support = false,
             root_dir = lspconfig.util.root_pattern("package.json"),
         })
-        lspconfig.cssls.setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-        })
-        lspconfig.eslint.setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-        })
+        lspconfig.cssls.setup({ on_attach = on_attach, capabilities = capabilities, })
+        lspconfig.eslint.setup({ on_attach = on_attach, capabilities = capabilities, })
         lspconfig.gopls.setup({
             capabilities = capabilities,
             cmd = { "gopls", "--remote=auto" },
             on_attach = on_attach,
         })
-        lspconfig.pyright.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-        lspconfig.html.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-        lspconfig.jsonls.setup({
-            capabilities = capabilities,
-        })
+        lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach, })
+        lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach, })
+        lspconfig.jsonls.setup({ capabilities = capabilities, })
         lspconfig.lua_ls.setup({
             capabilities = capabilities,
             on_attach = on_attach,
@@ -110,14 +94,8 @@ return {
                 Lua = {},
             },
         })
-        lspconfig.rubocop.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-        lspconfig.ruby_lsp.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
+        lspconfig.rubocop.setup({ capabilities = capabilities, on_attach = on_attach, })
+        lspconfig.ruby_lsp.setup({ capabilities = capabilities, on_attach = on_attach, })
         lspconfig.omnisharp.setup({
             cmd = { "omnisharp" },
             root_dir = lspconfig.util.root_pattern("*.csproj", "*.sln"),

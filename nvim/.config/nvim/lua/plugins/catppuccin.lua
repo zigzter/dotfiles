@@ -8,6 +8,7 @@ return {
             flavour = "mocha",
             integrations = {
                 dashboard = true,
+                blink_cmp = true,
                 harpoon = true,
                 leap = true,
                 mason = true,
