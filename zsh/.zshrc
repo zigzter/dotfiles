@@ -59,6 +59,19 @@ dei() {
     docker exec -it $id /bin/bash
 }
 
+# Add a safety check when running git restore without --staged
+git() {
+    if [ "$1" = "restore" ] && [ "$2" != "--staged" ] ; then
+        echo "did you mean to pass --staged?"
+        read -r i
+        if [ "$i" = "no" ]; then
+            command git $@
+        fi
+    else
+        command git "$@"
+    fi
+}
+
 export EDITOR="nvim"
 export VISUAL="nvim"
 

@@ -16,7 +16,7 @@ return {
         },
         completion = {
             list = { selection = 'auto_insert' },
-            accept = { auto_brackets = { enabled = false } },
+            accept = { auto_brackets = { enabled = true } },
             documentation = {
                 auto_show = true,
                 auto_show_delay_ms = 0,

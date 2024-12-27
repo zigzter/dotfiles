@@ -11,6 +11,8 @@ return {
                 typescript = { "prettier" },
                 javascriptreact = { "prettier" },
                 typescriptreact = { "prettier" },
+                json = { "prettier" },
+                vue = { "prettier" },
                 go = { "gofumpt" },
                 lua = { "stylua" },
                 css = { "prettier" },
@@ -18,7 +20,7 @@ return {
                 ruby = { "rubocop" },
             },
             format_after_save = {
-                lsp_fallback = true,
+                lsp_fallback = false,
                 async = true,
                 timeout_ms = 2000,
             },

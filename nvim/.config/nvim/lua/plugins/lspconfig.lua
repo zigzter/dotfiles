@@ -11,6 +11,9 @@ return {
         local map = vim.keymap
         local opts = { noremap = true, silent = true }
         local on_attach = function(client, bufnr)
+            if client.name == "jsonls" or client.name == "eslint" then
+                client.server_capabilities.documentFormattingProvider = false
+            end
             opts.buffer = bufnr
             opts.desc = "[s]earch [r]eferences"
             map.set("n", "<leader>sr", "<cmd>Telescope lsp_references<CR>", opts)
