@@ -20,7 +20,7 @@ return {
                 ruby = { "rubocop" },
             },
             format_after_save = {
-                lsp_fallback = false,
+                lsp_fallback = true,
                 async = true,
                 timeout_ms = 2000,
             },
