@@ -1,0 +1,17 @@
+{
+    "autocmd (Filetype)": {
+        "body": [
+            "import { z } from \"zod\";",
+            "import { ThirdPartyApi } from \"./thirdPartyApi\";",
+            "export class ${1} extends ThirdPartyApi {",
+            "name = ${2};",
+            "url = ${3};",
+            "auth = ${4};",
+            "requestBody = {};",
+            "expectedResponse = z.object({${0}});",
+            "}"
+        ],
+        "prefix": "3api",
+        "description": "Scaffold a third party api class"
+    }
+}

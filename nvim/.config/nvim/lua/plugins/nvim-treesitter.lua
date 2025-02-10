@@ -15,6 +15,9 @@ return {
                 "python",
                 "ruby",
                 "vim",
+                "diff",
+                "vue",
+                "json",
             },
             auto_install = true,
             highlight = {

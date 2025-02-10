@@ -60,7 +60,7 @@ return {
                 },
             },
             lualine_b = { { "filename", path = 0, color = { fg = colors.overlay1 } } },
-            lualine_c = { { "branch", color = { fg = colors.overlay1 } } },
+            lualine_c = {},
             lualine_x = {},
             lualine_y = { { "filetype", color = { fg = colors.overlay1 } } },
             lualine_z = {

@@ -15,7 +15,7 @@ return {
             ["<C-b>"] = { "scroll_documentation_up", "fallback" },
         },
         completion = {
-            list = { selection = "auto_insert" },
+            list = { selection = { preselect = true, auto_insert = true } },
             accept = { auto_brackets = { enabled = true } },
             documentation = {
                 auto_show = true,
@@ -30,6 +30,7 @@ return {
         },
         sources = {
             default = { "lsp", "path", "snippets", "buffer" },
+            per_filetype = { "codecompanion" },
             cmdline = {
                 min_keyword_length = 3,
             },

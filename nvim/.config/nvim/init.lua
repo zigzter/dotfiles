@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.opt.rnu = true
+vim.opt.rnu = false
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -50,8 +50,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 require("lazy").setup("plugins")
-
-vim.cmd.colorscheme("catppuccin")
 
 -- Relies on Lazy module imports, so has to come after Lazy
 require("mappings")

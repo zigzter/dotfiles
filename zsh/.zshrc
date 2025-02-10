@@ -27,6 +27,7 @@ alias gn='git checkout -b'
 alias gc='git checkout'
 alias rbc='git rebase --continue'
 alias gcv='git commit -v'
+alias gwt='function _gwt() { git worktree add "$1" -b "$1" && cd "$1"; }; _gwt'
 alias tma='tmux attach -t'
 alias ls='lsd'
 alias la='ls -lah'
@@ -36,6 +37,8 @@ alias ff=fastfetch
 alias se='SUDO_EDITOR=nvim sudoedit'
 alias syu='sudo pacman -Syu'
 alias pacclean='sudo paccache -rk 2'
+alias ai="aider --model ollama_chat/qwen2 --chat-mode architect"
+alias aia="aider --model ollama_chat/qwen2 --chat-mode ask"
 
 # Get top 5 size offenders
 sizing() {
@@ -74,6 +77,7 @@ git() {
 
 export EDITOR="nvim"
 export VISUAL="nvim"
+export OLLAMA_API_BASE="http://127.0.0.1:11434"
 
 bindkey '^R' history-incremental-search-backward
 
@@ -109,3 +113,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 . "/home/ziggy/.deno/env"
+
+. "$HOME/.local/bin/env"
