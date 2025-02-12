@@ -6,6 +6,7 @@
             "export class ${1} extends ThirdPartyApi {",
             "name = ${2};",
             "url = ${3};",
+            "method = \"POST\";",
             "auth = ${4};",
             "requestBody = {};",
             "expectedResponse = z.object({${0}});",

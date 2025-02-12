@@ -7,11 +7,18 @@ return {
     opts = {
         strategies = {
             chat = {
-                adapter = "ollama"
+                adapter = "anthropic"
             },
             inline = {
-                adapter = "ollama"
+                adapter = "anthropic"
             },
+        },
+        adapters = {
+            ollama = function()
+                return require("codecompanion.adapters").extend("ollama", {
+                    name = "qwen2.5-coder:14b",
+                })
+            end,
         }
     }
 }

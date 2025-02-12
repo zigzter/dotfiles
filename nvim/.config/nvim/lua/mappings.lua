@@ -1,8 +1,6 @@
 local builtin = require("telescope.builtin")
 local harpoon = require("harpoon")
 local dap = require("dap")
-local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
 
 local function nmap(lhs, rhs, desc) vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, desc = desc }) end
 
@@ -69,6 +67,11 @@ end, "[d]ebug [e]xit")
 
 -- Neo-tree
 nmap("<leader>fb", ":Neotree toggle float<CR>", "[f]ile [b]rowser (neo-tree)")
+
+-- CodeCompanion
+nmap("<leader>cc", ":CodeCompanionChat Toggle<CR>", "[c]odecompanion [c]hat")
+nmap("<leader>ca", ":CodeCompanionActions<CR>", "[c]odecompanion [a]ctions")
+vim.cmd([[cab cc CodeCompanion]]) -- Expand cc to CodeCompanion in the command line
 
 -- Misc
 nmap("<leader>co", ":only<CR>", "[c]lose [o]ther splits")

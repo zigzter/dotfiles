@@ -75,27 +75,42 @@ return {
         lspconfig.jsonls.setup({ capabilities = capabilities, })
         lspconfig.lua_ls.setup({
             capabilities = capabilities,
-            on_attach = on_attach,
             on_init = function(client)
+                client.server_capabilities.semanticTokensProvider = nil
+
                 if client.workspace_folders then
                     local path = client.workspace_folders[1].name
-                    if vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc") then return end
+                    if
+                        path ~= vim.fn.stdpath("config")
+                        and (
+                            vim.loop.fs_stat(path .. "/.luarc.json")
+                            or vim.loop.fs_stat(path .. "/.luarc.jsonc")
+                        )
+                    then
+                        return
+                    end
                 end
-                client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-                    runtime = {
-                        version = "LuaJIT",
-                    },
-                    workspace = {
-                        checkThirdParty = false,
-                        library = {
-                            vim.env.VIMRUNTIME,
+
+                client.config.settings = client.config.settings or {}
+                client.config.settings.Lua = client.config.settings.Lua or {}
+                client.config.settings.Lua = vim.tbl_deep_extend(
+                    "force",
+                    client.config.settings.Lua,
+                    {
+                        runtime = {
+                            version = "LuaJIT",
                         },
-                    },
-                })
+                        workspace = {
+                            checkThirdParty = false,
+                            library = {
+                                "$VIMRUNTIME",
+                                "$XDG_DATA_HOME/nvim/lazy",
+                                "${3rd}/luv/library",
+                            },
+                        },
+                    }
+                )
             end,
-            settings = {
-                Lua = {},
-            },
         })
         lspconfig.rubocop.setup({ capabilities = capabilities, on_attach = on_attach, })
         lspconfig.ruby_lsp.setup({ capabilities = capabilities, on_attach = on_attach, })
