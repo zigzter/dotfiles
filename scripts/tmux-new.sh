@@ -2,7 +2,7 @@
 set -e
 
 # Wrapper script for tmux sessions and worktrees
-# Usage: ./tmux_worktree_wrapper.sh <ticket-name> <repo-group>
+# Usage: ./tmux-new.sh <ticket-name> <repo-group>
 
 if [ "$#" -lt 2 ]; then
   echo "Usage: $0 <ticket-name> <repo-group: pallet|tariff>"

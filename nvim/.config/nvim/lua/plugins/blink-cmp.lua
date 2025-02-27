@@ -31,9 +31,11 @@ return {
         sources = {
             default = { "lsp", "path", "snippets", "buffer" },
             per_filetype = { "codecompanion" },
-            cmdline = {
-                min_keyword_length = 3,
-            },
+            min_keyword_length = function(ctx)
+                -- only applies when typing a command, doesn't apply to arguments
+                if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 3 end
+                return 0
+            end
         },
         signature = { enabled = true },
     },
