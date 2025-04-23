@@ -3,7 +3,11 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = {
-        "MunifTanjim/nui.nvim",
+        {
+            "MunifTanjim/nui.nvim",
+            -- problem with winborder on latest commit
+            commit = "8d3bce9764e627b62b07424e0df77f680d47ffdb"
+        },
     },
     opts = {
         lsp = {

@@ -37,8 +37,7 @@ alias ff=fastfetch
 alias se='SUDO_EDITOR=nvim sudoedit'
 alias syu='sudo pacman -Syu'
 alias pacclean='sudo paccache -rk 2'
-alias ai="aider --model ollama_chat/qwen2 --chat-mode architect"
-alias aia="aider --model ollama_chat/qwen2 --chat-mode ask"
+alias tmn='~/tmux-new.sh'
 
 # Get top 5 size offenders
 sizing() {
