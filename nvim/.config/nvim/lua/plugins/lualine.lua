@@ -1,73 +1,48 @@
--- Status line
-local catppuccin = require("lualine.themes.catppuccin")
--- Copy the catppuccin theme and remove background colors
-local clean_catppuccin = vim.tbl_deep_extend("force", {}, catppuccin)
-for _, mode in pairs(clean_catppuccin) do
-    for _, section in pairs(mode) do
-        section.bg = nil
-    end
-end
-
-local colors = require("catppuccin.palettes").get_palette()
-local mode_colors = {
-    n = colors.blue,
-    i = colors.green,
-    v = colors.mauve,
-    V = colors.mauve,
-    [""] = colors.mauve,
-    R = colors.red,
-    c = colors.peach,
-    s = colors.sky,
-    S = colors.sky,
-    [""] = colors.sky,
-    t = colors.teal,
-}
-
-local function get_mode_color()
-    local mode = vim.fn.mode()
-    return { fg = mode_colors[mode] or colors.overlay1 } -- Default to inactive if mode not matched
-end
-
-local function get_mode_text()
-    local mode_names = {
-        n = "NORMAL",
-        i = "INSERT",
-        v = "VISUAL",
-        V = "V-LINE",
-        [""] = "V-BLOCK",
-        c = "COMMAND",
-        R = "REPLACE",
-        t = "TERMINAL",
-    }
-    return mode_names[vim.fn.mode()] or "UNKNOWN"
-end
-
 return {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons", opt = true },
     opts = {
         options = {
-            theme = clean_catppuccin,
+            theme = "gruvbox-material",
             component_separators = "",
             section_separators = "",
             globalstatus = true,
+            always_divide_middle = true,
+            disabled_filetypes = {
+                statusline = {},
+                winbar = {},
+            },
         },
         sections = {
-            lualine_a = {
+            lualine_a = { "mode" },
+            lualine_b = {},
+            lualine_c = {},
+            lualine_x = {
                 {
-                    get_mode_text,
-                    color = get_mode_color,
+                    "diagnostics",
+                    symbols = { error = " ", warn = " ", info = " ", hint = " " },
+                },
+                "filetype",
+            },
+            lualine_y = { "progress" },
+            lualine_z = { "location" },
+        },
+        inactive_sections = {
+            lualine_a = {},
+            lualine_b = {},
+            lualine_c = {
+                {
+                    "filename",
+                    path = 1,
+                    shorting_rule = "truncate_left",
                 },
             },
-            lualine_b = { { "filename", path = 0, color = { fg = colors.overlay1 } } },
-            lualine_c = {},
-            lualine_x = {},
-            lualine_y = { { "filetype", color = { fg = colors.overlay1 } } },
-            lualine_z = {
-                { "location", left_padding = 2, color = { fg = colors.sky } },
-            },
+            lualine_x = { "location" },
+            lualine_y = {},
+            lualine_z = {},
         },
         tabline = {},
-        extensions = {},
+        winbar = {},
+        inactive_winbar = {},
     },
 }

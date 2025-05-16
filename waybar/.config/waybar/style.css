@@ -1,124 +1,117 @@
-@import "macchiato.css";
-
 * {
-    color: @lavender;
-    font-family: JetBrainsMono Nerd Font Mono;
-    font-size: 18px;
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font Mono";
+    font-size: 14px;
     min-height: 0;
 }
 
-#waybar {
-    background: transparent;
-    color: @text;
-    margin: 5px 5px 0px 5px;
-}
-
-#workspaces {
-    border-radius: 0.5rem;
-    margin: 8px 8px;
-    background-color: @surface0;
+window#waybar {
+    background-color: #282828;
+    color: #ebdbb2;
+    transition-property: background-color;
+    transition-duration: .5s;
 }
 
 #workspaces button {
-    color: @base;
-    border-radius: 0.5rem;
-}
-
-#workspaces button.active {
-    color: @sky;
-    border-radius: 1rem;
+    padding: 0 5px;
+    background-color: transparent;
+    color: #a89984;
 }
 
 #workspaces button:hover {
-    color: @mauve;
-    border-radius: 0.5rem;
+    background: #3c3836;
+}
+
+#workspaces button.active {
+    background-color: #3c3836;
+    color: #b8bb26;
+}
+
+#workspaces button.focused {
+    background-color: #458588;
+    color: #282828;
 }
 
 #workspaces button.urgent {
-    background-color: @red;
+    background-color: #fb4934;
+    color: #282828;
 }
 
-#pulseaudio,
-#custom-music,
-#tray,
-#backlight,
-#network,
 #clock,
 #battery,
-#memory,
 #cpu,
-#privacy,
-#window,
-#custom-lock,
-#custom-power {
-    background-color: @surface0;
-    margin: 8px 0px;
-    padding: 0.3rem 0.8rem;
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#mpd {
+    padding: 0 10px;
+    margin: 0 2px;
+    color: #ebdbb2;
 }
 
 #window {
-    margin-left: 12px;
-    border-radius: 0.5rem
+    font-weight: bold;
+    color: #fabd2f;
 }
 
 #clock {
-    color: @teal;
-    border-radius: 0.5rem;
-}
-
-#privacy {
-    border-radius: 0.5rem;
-}
-
-#tray {
-    margin: 8px;
-    border-radius: 0.5rem;
-}
-
-#memory {
-    color: @teal;
-}
-
-#cpu {
-    color: @teal;
-    border-radius: 0.5rem 0 0 0.5rem;
-}
-
-#network {
-    color: @green;
-}
-
-#battery {
-    color: @green;
-    border-radius: 0.5rem;
-    margin-left: 2px;
-}
-
-#battery.charging {
-    color: @green;
-}
-
-#battery.warning:not(.charging) {
-    color: @red;
-}
-
-#backlight {
-    color: @yellow;
+    color: #83a598;
 }
 
 #pulseaudio {
-    color: @maroon;
-    border-radius: 0 0.5rem 0.05rem 0;
+    color: #b8bb26;
 }
 
-#custom-lock {
-    border-radius: 0.5rem 0px 0px 0.5rem;
-    margin-left: 12px;
-    color: @lavender;
+#network {
+    color: #fe8019;
 }
 
-#custom-power {
-    margin-right: 1rem;
-    border-radius: 0px 0.5rem 0.5rem 0px;
-    color: @red;
+#battery {
+    background-color: transparent;
+    color: #ebdbb2;
+    padding: 0 10px;
+    margin: 0 2px;
+}
+
+#battery icon {
+    color: #ebdbb2;
+}
+
+#battery.good {
+    color: #b8bb26;
+}
+
+#battery.warning {
+    color: #fabd2f;
+}
+
+#battery.critical {
+    color: #fb4934;
+    animation-name: blink;
+    animation-duration: 0.8s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #83a598;
+}
+
+#tray>.passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #fb4934;
 }

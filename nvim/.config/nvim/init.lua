@@ -43,6 +43,22 @@ vim.api.nvim_create_autocmd({ "FocusLost" }, {
     command = "silent! update",
 })
 
+-- Create scratchpad
+function new_scratch()
+    vim.api.nvim_command("vsplit")
+    -- Create scratch buffer
+    local buf = vim.api.nvim_create_buf(false, true)
+    -- Set current window to use the new buffer
+    local win = vim.api.nvim_get_current_win()
+    vim.api.nvim_win_set_buf(win, buf)
+    -- Set scratch buffer properties
+    vim.opt_local.buftype = "nofile"
+    vim.opt_local.bufhidden = "hide"
+    vim.opt_local.swapfile = false
+end
+
+vim.keymap.set("n", "Ns", new_scratch, { noremap = true, silent = true, desc = "Open [N]ew [s]cratchpad" })
+
 -- set 50 and 72 char limit columns on gitcommits
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "gitcommit",
