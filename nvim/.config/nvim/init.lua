@@ -36,6 +36,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
+vim.fn.setreg("l", "yoconsole.log('" .. esc .. "pa: " .. esc .. "la, " .. esc .. "pl")
+
 -- Save when focus is lost
 vim.api.nvim_create_autocmd({ "FocusLost" }, {
     desc = "autosave",
