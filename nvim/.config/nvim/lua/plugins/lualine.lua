@@ -73,8 +73,8 @@ return {
                     n = colors.blue,
                     i = colors.green,
                     v = colors.purple,
-                    [''] = colors.blue,
-                    V = colors.blue,
+                    [''] = colors.purple,
+                    V = colors.purple,
                     c = colors.purple,
                     no = colors.red,
                     s = colors.orange,
@@ -91,7 +91,7 @@ return {
                     ['!'] = colors.red,
                     t = colors.red,
                 }
-                return { fg = mode_color[vim.fn.mode()] }
+                return { bg = mode_color[vim.fn.mode()], fg = colors.bg }
             end,
             padding = { right = 1, left = 1 },
         })
