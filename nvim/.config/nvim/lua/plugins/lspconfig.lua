@@ -15,14 +15,12 @@ return {
                 client.server_capabilities.documentFormattingProvider = false
             end
             opts.buffer = bufnr
-            opts.desc = "[s]earch [r]eferences"
-            map.set("n", "<leader>sr", "<cmd>Telescope lsp_references<CR>", opts)
 
             opts.desc = "[g]o to [d]efinition"
             map.set("n", "gd", vim.lsp.buf.definition, opts)
 
             opts.desc = "Show line diagnostics"
-            map.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+            map.set("n", "<leader>D", vim.diagnostic.open_float, opts)
 
             opts.desc = "Show [b]uffer [d]iagnostics"
             map.set("n", "<leader>bd", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)

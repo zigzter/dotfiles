@@ -10,12 +10,9 @@ return {
         require("mini.ai").setup()
         require("mini.surround").setup({
             mappings = {
-                add = "msa", -- Add surrounding in Normal and Vsual modes
-                delete = "msd", -- Delete surroundng
-                find = "msf", -- Find surrounding (to the right)
-                find_left = "msF", -- Find surrounding (to the left)
-                highlight = "msh", -- Highlight surrounding
-                replace = "msr", -- Replace surrounding
+                add = "<M-a>", -- Add surrounding in Normal and Vsual modes
+                delete = "<M-d>", -- Delete surroundng
+                replace = "<M-r>", -- Replace surrounding
             },
         })
     end,

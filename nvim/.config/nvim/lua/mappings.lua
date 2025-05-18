@@ -1,5 +1,4 @@
 local builtin = require("telescope.builtin")
-local harpoon = require("harpoon")
 local dap = require("dap")
 
 local function nmap(lhs, rhs, desc) vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, desc = desc }) end
@@ -35,15 +34,6 @@ nmap("<leader>ga", ":Git add %<cr>", "[g]it [a]dd")
 nmap("<leader>gc", ":tab Git commit -v<cr>", "[g]it [c]ommit")
 nmap("<leader>gp", ":Git push<cr>", "[g]it [p]ush")
 nmap("<leader>gr", ":Git restore %<cr>", "[g]it [r]estore")
-
--- Harpoon
-nmap("<leader>a", function() harpoon:list():add() end, "Harpoon add")
-nmap("<leader>v", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, "View Harpoon list")
-nmap("<leader>q", function() harpoon:list():select(1) end, "Open Harpoon 1")
-nmap("<leader>w", function() harpoon:list():select(2) end, "Open Harpoon 2")
-nmap("<leader>e", function() harpoon:list():select(3) end, "Open Harpoon 3")
-nmap("<leader>r", function() harpoon:list():select(4) end, "Open Harpoon 4")
-nmap("<leader>t", function() harpoon:list():select(5) end, "Open Harpoon 5")
 
 -- Oil
 nmap("-", ":Oil<CR>", "Open Oil")
