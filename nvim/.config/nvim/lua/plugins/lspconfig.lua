@@ -63,16 +63,16 @@ return {
             single_file_support = false,
             root_dir = lspconfig.util.root_pattern("package.json"),
         })
-        lspconfig.cssls.setup({ on_attach = on_attach, capabilities = capabilities, })
-        lspconfig.eslint.setup({ on_attach = on_attach, capabilities = capabilities, })
+        lspconfig.cssls.setup({ on_attach = on_attach, capabilities = capabilities })
+        lspconfig.eslint.setup({ on_attach = on_attach, capabilities = capabilities })
         lspconfig.gopls.setup({
             capabilities = capabilities,
             cmd = { "gopls", "--remote=auto" },
             on_attach = on_attach,
         })
-        lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach, })
-        lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach, })
-        lspconfig.jsonls.setup({ capabilities = capabilities, })
+        lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
+        lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach })
+        lspconfig.jsonls.setup({ capabilities = capabilities })
         lspconfig.lua_ls.setup({
             capabilities = capabilities,
             on_init = function(client)
@@ -82,10 +82,7 @@ return {
                     local path = client.workspace_folders[1].name
                     if
                         path ~= vim.fn.stdpath("config")
-                        and (
-                            vim.loop.fs_stat(path .. "/.luarc.json")
-                            or vim.loop.fs_stat(path .. "/.luarc.jsonc")
-                        )
+                        and (vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc"))
                     then
                         return
                     end
@@ -93,38 +90,34 @@ return {
 
                 client.config.settings = client.config.settings or {}
                 client.config.settings.Lua = client.config.settings.Lua or {}
-                client.config.settings.Lua = vim.tbl_deep_extend(
-                    "force",
-                    client.config.settings.Lua,
-                    {
-                        runtime = {
-                            version = "LuaJIT",
+                client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+                    runtime = {
+                        version = "LuaJIT",
+                    },
+                    workspace = {
+                        checkThirdParty = false,
+                        library = {
+                            "$VIMRUNTIME",
+                            "$XDG_DATA_HOME/nvim/lazy",
+                            "${3rd}/luv/library",
                         },
-                        workspace = {
-                            checkThirdParty = false,
-                            library = {
-                                "$VIMRUNTIME",
-                                "$XDG_DATA_HOME/nvim/lazy",
-                                "${3rd}/luv/library",
-                            },
-                        },
-                    }
-                )
+                    },
+                })
             end,
         })
-        lspconfig.rubocop.setup({ capabilities = capabilities, on_attach = on_attach, })
-        lspconfig.ruby_lsp.setup({ capabilities = capabilities, on_attach = on_attach, })
+        lspconfig.rubocop.setup({ capabilities = capabilities, on_attach = on_attach })
+        lspconfig.ruby_lsp.setup({ capabilities = capabilities, on_attach = on_attach })
         lspconfig.omnisharp.setup({
             cmd = { "omnisharp" },
             root_dir = lspconfig.util.root_pattern("*.csproj", "*.sln"),
             capabilities = capabilities,
             on_attach = on_attach,
         })
-        lspconfig.denols.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-        })
+        -- lspconfig.denols.setup({
+        --     capabilities = capabilities,
+        --     on_attach = on_attach,
+        --     root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+        -- })
         lspconfig.vuels.setup({
             capabilities = capabilities,
             on_attach = on_attach,

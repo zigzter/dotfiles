@@ -12,12 +12,15 @@ return {
         notifier = {},
         indent = {
             indent = {
+                enabled = false,
                 only_current = true,
-                hl = "SnacksIndentInactive"
+                only_scope = true,
+                hl = "SnacksIndentInactive",
             },
             scope = {
-                hl = "SnacksIndentActive"
-            }
+                hl = "SnacksIndentActive",
+                only_current = true,
+            },
         },
     },
 }
