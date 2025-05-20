@@ -24,6 +24,10 @@ nmap("<leader>sc", builtin.git_bcommits, "[s]earch [c]ommits (current buffer)")
 nmap("<leader>sd", builtin.git_status, "[s]earch [d]iff")
 nmap("<leader>/", builtin.current_buffer_fuzzy_find, "[/] Fuzzily search in current buffer")
 nmap("<leader>sn", function() builtin.find_files({ cwd = vim.fn.stdpath("config") }) end, "[s]earch [n]eovim config")
+nmap("<leader>ad", builtin.diagnostics, "Show [a]ll buffer [d]iagnostics")
+nmap("<leader>bd", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show [b]uffer [d]iagnostics")
+
+
 
 -- Vim Fugitive
 nmap("<leader>gs", ":Git<cr>", "[g]it [s]tatus")
@@ -53,9 +57,9 @@ nmap("<leader>di", dap.step_into, "[d]ebug [i]nto (step into)")
 nmap("<leader>do", dap.step_out, "[d]ebug [o]ut (step out)")
 nmap("<leader>dC", function() dap.clear_breakpoints() end, "[C]lear breakpoints")
 nmap("<leader>de", function()
-    dap.clear_breakpoints()
-    dap.terminate()
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
+  dap.clear_breakpoints()
+  dap.terminate()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
 end, "[d]ebug [e]xit")
 
 -- Neo-tree
@@ -68,3 +72,10 @@ vim.cmd([[cab cc CodeCompanion]]) -- Expand cc to CodeCompanion in the command l
 
 -- Misc
 nmap("<leader>co", ":only<CR>", "[c]lose [o]ther splits")
+nmap("<leader>D", vim.diagnostic.open_float, "Show line diagnostics")
+nmap("[d", vim.diagnostic.goto_prev, "Go to previous diagnostic line")
+nmap("]d", vim.diagnostic.goto_next, "Go to next diagnostic line")
+nmap("K", vim.lsp.buf.hover, "Show documentation of what is under cursor")
+nmap("gd", vim.lsp.buf.definition, "[g]o to [d]efinition")
+nmap("<leader>rn", vim.lsp.buf.rename, "Smart rename")
+nmap("<leader>rs", ":LspRestart<CR>", "Restart LSP")
