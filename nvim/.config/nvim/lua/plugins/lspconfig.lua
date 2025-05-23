@@ -42,81 +42,32 @@ return {
       },
     })
 
-    vim.lsp.enable('dockerls', { capabilities = capabilities })
-    vim.lsp.enable('ts_ls', {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      settings = {
-        implicitProjectConfiguration = { checkJs = true },
-      },
-      single_file_support = true,
-      root_dir = lspconfig.util.root_pattern("package.json"),
-    })
-    vim.lsp.enable('cssls', { on_attach = on_attach, capabilities = capabilities })
-    vim.lsp.enable('eslint', { on_attach = on_attach, capabilities = capabilities })
-    vim.lsp.enable('gopls', {
-      capabilities = capabilities,
-      cmd = { "gopls", "--remote=auto" },
-      on_attach = on_attach,
-    })
-    vim.lsp.enable('pyright', { capabilities = capabilities, on_attach = on_attach })
-    vim.lsp.enable('html', { capabilities = capabilities, on_attach = on_attach })
-    vim.lsp.enable('jsonls', { capabilities = capabilities })
-    vim.lsp.enable('lua_ls', {
-      capabilities = capabilities,
-      on_init = function(client)
-        client.server_capabilities.semanticTokensProvider = nil
-
-        if client.workspace_folders then
-          local path = client.workspace_folders[1].name
-          if
-              path ~= vim.fn.stdpath("config")
-              and (vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc"))
-          then
-            return
-          end
-        end
-
-        client.config.settings = client.config.settings or {}
-        client.config.settings.Lua = client.config.settings.Lua or {}
-        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-          runtime = {
-            version = "LuaJIT",
-          },
-          workspace = {
-            checkThirdParty = false,
-            library = {
-              "$VIMRUNTIME",
-              "$XDG_DATA_HOME/nvim/lazy",
-              "${3rd}/luv/library",
-            },
-          },
-        })
-      end,
-    })
-    vim.lsp.enable('rubocop', { capabilities = capabilities, on_attach = on_attach })
-    vim.lsp.enable('ruby_lsp', { capabilities = capabilities, on_attach = on_attach })
-    vim.lsp.enable('omnisharp', {
-      cmd = { "omnisharp" },
-      root_dir = lspconfig.util.root_pattern("*.csproj", "*.sln"),
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-    -- lspconfig.denols.setup({
-    --     capabilities = capabilities,
-    --     on_attach = on_attach,
-    --     root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-    -- })
-    vim.lsp.enable('vuels', {
-      capabilities = capabilities,
-      on_attach = on_attach,
+    vim.lsp.enable('dockerls')
+    vim.lsp.enable('ts_ls')
+    vim.lsp.enable('cssls')
+    vim.lsp.enable('eslint')
+    vim.lsp.enable('gopls')
+    vim.lsp.enable('pyright')
+    vim.lsp.enable('html')
+    vim.lsp.enable('jsonls')
+    vim.lsp.enable('lua_ls')
+    vim.lsp.enable('rubocop')
+    vim.lsp.enable('ruby_lsp')
+    vim.lsp.enable('omnisharp')
+    vim.lsp.config('vue_ls', {
       init_options = {
-        config = {
-          vetur = {
-            ignoreProjectWarning = true,
-          },
-        },
+        typescript = {
+          -- replace with your global TypeScript library path
+          tsdk = '~/.nvm/versions/node/v18.20.6/lib/node_modules/typescript/lib/'
+        }
       },
+      before_init = function(params, config)
+        local lib_path = vim.fs.find('node_modules/typescript/lib', { path = new_root_dir, upward = true })[1]
+        if lib_path then
+          config.init_options.typescript.tsdk = lib_path
+        end
+      end
     })
+    vim.lsp.enable('vue_ls')
   end,
 }

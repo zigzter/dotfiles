@@ -6,12 +6,12 @@ return {
     local conform = require("conform")
     conform.setup({
       formatters_by_ft = {
-        javascript = { "prettierd", "prettier", "eslint_d", stop_after_first = true },
-        typescript = { "prettierd", "prettier", "eslint_d", stop_after_first = true },
+        javascript = { "eslint_d", "prettierd", "prettier", stop_after_first = true },
+        typescript = { "eslint_d", "prettierd", "prettier", stop_after_first = true },
         javascriptreact = { "prettierd", "prettier" },
         typescriptreact = { "prettierd", "prettier" },
         json = { "prettier" },
-        vue = { "prettierd", "prettier" },
+        vue = { "eslint_d", stop_after_first = true },
         go = { "gofumpt" },
         lua = { "stylua" },
         css = { "prettier" },
