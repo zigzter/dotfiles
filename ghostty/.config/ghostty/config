@@ -1,1 +1,5 @@
-theme = GruvboxDarkHard
+theme = gruvbox-material
+
+# Override black colors to be more visible
+palette = 0=#928374
+palette = 8=#a89984
