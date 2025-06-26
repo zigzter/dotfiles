@@ -19,20 +19,20 @@ vim.opt.updatetime = 50
 
 vim.opt.scrolloff = 5
 
-vim.opt.laststatus = 0
+vim.opt.laststatus = 3
 
 -- lazy.nvim setup
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable",
-        lazypath,
-    })
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -41,31 +41,31 @@ vim.fn.setreg("l", "yoconsole.log('" .. esc .. "pa: " .. esc .. "la, " .. esc ..
 
 -- Save when focus is lost
 vim.api.nvim_create_autocmd({ "FocusLost" }, {
-    desc = "autosave",
-    pattern = "*",
-    command = "silent! update",
+  desc = "autosave",
+  pattern = "*",
+  command = "silent! update",
 })
 
 -- Create scratchpad
 function new_scratch()
-    vim.api.nvim_command("vsplit")
-    -- Create scratch buffer
-    local buf = vim.api.nvim_create_buf(false, true)
-    -- Set current window to use the new buffer
-    local win = vim.api.nvim_get_current_win()
-    vim.api.nvim_win_set_buf(win, buf)
-    -- Set scratch buffer properties
-    vim.opt_local.buftype = "nofile"
-    vim.opt_local.bufhidden = "hide"
-    vim.opt_local.swapfile = false
+  vim.api.nvim_command("vsplit")
+  -- Create scratch buffer
+  local buf = vim.api.nvim_create_buf(false, true)
+  -- Set current window to use the new buffer
+  local win = vim.api.nvim_get_current_win()
+  vim.api.nvim_win_set_buf(win, buf)
+  -- Set scratch buffer properties
+  vim.opt_local.buftype = "nofile"
+  vim.opt_local.bufhidden = "hide"
+  vim.opt_local.swapfile = false
 end
 
 vim.keymap.set("n", "Ns", new_scratch, { noremap = true, silent = true, desc = "Open [N]ew [s]cratchpad" })
 
 -- set 50 and 72 char limit columns on gitcommits
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "gitcommit",
-    callback = function() vim.opt_local.colorcolumn = "50,72" end,
+  pattern = "gitcommit",
+  callback = function() vim.opt_local.colorcolumn = "50,72" end,
 })
 
 require("lazy").setup("plugins")
