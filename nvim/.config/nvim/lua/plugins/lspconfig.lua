@@ -28,7 +28,7 @@ return {
           [vim.diagnostic.severity.INFO]  = "",
         },
       },
-      virtual_text = false,
+      virtual_text = true,
       float = {
         border = "single",
         format = function(diagnostic)
