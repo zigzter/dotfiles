@@ -1,5 +1,6 @@
 local builtin = require("telescope.builtin")
 local dap = require("dap")
+local dropbar = require("dropbar.api")
 
 local function nmap(lhs, rhs, desc) vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, desc = desc }) end
 
@@ -27,8 +28,6 @@ nmap("<leader>/", builtin.current_buffer_fuzzy_find, "[/] Fuzzily search in curr
 nmap("<leader>sn", function() builtin.find_files({ cwd = vim.fn.stdpath("config") }) end, "[s]earch [n]eovim config")
 nmap("<leader>ad", builtin.diagnostics, "Show [a]ll buffer [d]iagnostics")
 nmap("<leader>bd", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show [b]uffer [d]iagnostics")
-
-
 
 -- Vim Fugitive
 nmap("<leader>gs", ":Git<cr>", "[g]it [s]tatus")
@@ -70,6 +69,11 @@ nmap("<leader>fb", ":Neotree toggle float<CR>", "[f]ile [b]rowser (neo-tree)")
 nmap("<leader>cc", ":CodeCompanionChat Toggle<CR>", "[c]odecompanion [c]hat")
 nmap("<leader>ca", ":CodeCompanionActions<CR>", "[c]odecompanion [a]ctions")
 vim.cmd([[cab cc CodeCompanion]]) -- Expand cc to CodeCompanion in the command line
+
+-- Dropbar
+nmap("<leader>s;", dropbar.pick, "[s]earch Dropbar symbols")
+nmap("<leader>[;", dropbar.goto_context_start, "Go to start of context")
+nmap("<leader>];", dropbar.select_next_context, "Select next context")
 
 -- Misc
 nmap("<leader>co", ":only<CR>", "[c]lose [o]ther splits")
