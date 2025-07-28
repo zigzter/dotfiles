@@ -36,6 +36,42 @@
     "format": " {:%H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": ["󰃞", "󰃟", "󰃠"]
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
+    "format-bluetooth-muted": "󰖁 {icon}",
+    "format-muted": "󰖁 {volume}%",
+    "format-source": "󰍬 {volume}%",
+    "format-source-muted": "󰍭",
+    "format-icons": {
+      "headphone": "󰋋",
+      "hands-free": "󰋎",
+      "headset": "󰋎",
+      "phone": "󰄜",
+      "portable": "󰦧",
+      "car": "󰄋",
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "on-click": "pavucontrol"
+  },
+  "network": {
+    "format-wifi": "󰤨 {signalStrength}%",
+    "format-ethernet": "󰈀 {ipaddr}",
+    "format-linked": "󰤭 {ifname} (No IP)",
+    "format-disconnected": "󰤮 Disconnected",
+    "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "cpu": {
+    "format": "󰘚 {usage}%",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "󰍛 {}%"
+  },
   "battery": {
     "states": {
       "good": 85,
