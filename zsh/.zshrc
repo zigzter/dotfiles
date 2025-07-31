@@ -76,7 +76,6 @@ git() {
 
 export EDITOR="nvim"
 export VISUAL="nvim"
-export OLLAMA_API_BASE="http://127.0.0.1:11434"
 
 bindkey '^R' history-incremental-search-backward
 
@@ -97,7 +96,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd $realpath'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin:/bin/rg:/opt/cuda/bin/nvcc:$HOME/projects/break-check:~/go/bin:~/nvim-linux64/bin/:~/.local/share/nvim/mason/bin/"
+export PATH="$PATH:$HOME/.rvm/bin:/bin/rg:/opt/cuda/bin/nvcc:$HOME/projects/break-check:~/go/bin:~/nvim-linux64/bin/:~/.local/share/nvim/mason/bin/:$HOME/.ebcli-virtual-env/executables"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -112,6 +111,5 @@ eval "$(zoxide init zsh)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-. "/home/ziggy/.deno/env"
 
 . "$HOME/.local/bin/env"
