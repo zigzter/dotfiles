@@ -57,16 +57,9 @@ return {
     vim.lsp.config('vue_ls', {
       init_options = {
         typescript = {
-          -- replace with your global TypeScript library path
-          tsdk = '~/.nvm/versions/node/v18.20.6/lib/node_modules/typescript/lib/'
+          tsdk = vim.fn.expand('~/.nvm/versions/node/v18.20.6/lib/node_modules/typescript/lib/')
         }
-      },
-      before_init = function(params, config)
-        local lib_path = vim.fs.find('node_modules/typescript/lib', { path = new_root_dir, upward = true })[1]
-        if lib_path then
-          config.init_options.typescript.tsdk = lib_path
-        end
-      end
+      }
     })
     vim.lsp.enable('vue_ls')
   end,
