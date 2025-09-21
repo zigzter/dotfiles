@@ -38,9 +38,6 @@ nmap("<leader>gc", ":tab Git commit -v<cr>", "[g]it [c]ommit")
 nmap("<leader>gp", ":Git push<cr>", "[g]it [p]ush")
 nmap("<leader>gr", ":Git restore %<cr>", "[g]it [r]estore")
 
--- Oil
-nmap("-", ":Oil<CR>", "Open Oil")
-
 -- Vim Test
 nmap("<leader>tn", ":TestNearest<CR>", "[t]est [n]earest")
 nmap("<leader>tf", ":TestFile<CR>", "[t]est [f]ile")
@@ -56,9 +53,9 @@ nmap("<leader>di", dap.step_into, "[d]ebug [i]nto (step into)")
 nmap("<leader>do", dap.step_out, "[d]ebug [o]ut (step out)")
 nmap("<leader>dC", function() dap.clear_breakpoints() end, "[C]lear breakpoints")
 nmap("<leader>de", function()
-  dap.clear_breakpoints()
-  dap.terminate()
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
+    dap.clear_breakpoints()
+    dap.terminate()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
 end, "[d]ebug [e]xit")
 
 -- Neo-tree
@@ -78,3 +75,4 @@ nmap("K", vim.lsp.buf.hover, "Show documentation of what is under cursor")
 nmap("gd", vim.lsp.buf.definition, "[g]o to [d]efinition")
 nmap("<leader>rn", vim.lsp.buf.rename, "Smart rename")
 nmap("<leader>rs", ":LspRestart<CR>", "Restart LSP")
+nmap("-", ":lua MiniFiles.open()<CR>", "Open mini.files")
