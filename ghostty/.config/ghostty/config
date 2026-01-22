@@ -1,5 +1,6 @@
-theme = gruvbox-material
+theme = Gruvbox Material
 
 # Override black colors to be more visible
 palette = 0=#928374
 palette = 8=#a89984
+keybind = shift+enter=text:\x1b\r

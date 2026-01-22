@@ -13,8 +13,12 @@ function M.get_navic_breadcrumbs()
     return ''
   end
 
-  -- Simply return the plain text without any highlights
-  -- This should blend with slimline's background completely
+  -- Limit breadcrumbs to max characters (adjust this value as needed)
+  local max_length = 80
+  if #breadcrumbs_string > max_length then
+    breadcrumbs_string = '...' .. breadcrumbs_string:sub(-(max_length - 3))
+  end
+
   return breadcrumbs_string
 end
 
