@@ -1,0 +1,4 @@
+[user]
+    email = ziggy@usepallet.com
+    name = Ziggy
+    signingkey = ~/.ssh/work.pub

@@ -1,0 +1,4 @@
+[user]
+    email = zigs_17@hotmail.com
+    name = Ziggy
+    signingkey = ~/.ssh/personal.pub

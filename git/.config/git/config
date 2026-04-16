@@ -1,0 +1,14 @@
+[alias]
+    cfw = "!sh ~/clone-for-worktrees.sh"
+[includeIf "gitdir:~/pallet/**"]
+    path = ~/.config/git/work
+[includeIf "gitdir:~/projects/**"]
+    path = ~/.config/git/personal
+[includeIf "gitdir:~/dotfiles/"]
+    path = ~/.config/git/personal
+[push]
+	autoSetupRemote = true
+[gpg]
+	format = ssh
+[commit]
+  gpgsign = true
