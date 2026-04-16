@@ -1,13 +1,12 @@
 MACHINE := $(shell hostname 2>/dev/null || hostnamectl hostname 2>/dev/null)
-COMMON := nvim tmux zsh bat btop fastfetch kitty ohmyposh
+COMMON := nvim tmux zsh bat btop fastfetch ghostty ohmyposh
 
-# Machine is my laptop
 ifeq ($(MACHINE), MADVILLAIN)
-    CONFIGS = dunst hypr swaylock systemd waybar wofi
-# Machine is my desktop
-else ifeq ($(MACHINE), ENDEAVOUR)
+    CONFIGS = mako hypr hyprlock waybar rofi
+else ifeq ($(MACHINE), DANGERDOOM)
+    CONFIGS = mako hypr hyprlock waybar rofi
 else
-    $(error Unknown machine type)
+    $(error Unknown machine type: $(MACHINE))
 endif
 
 FINAL := $(COMMON) $(CONFIGS)
@@ -16,4 +15,4 @@ all:
 	stow -v $(FINAL)
 
 delete:
-	stow -v --delete */
+	stow -v --delete $(FINAL)
