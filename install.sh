@@ -10,7 +10,7 @@ PKGS_BASE=(
     man-db man-pages
     zsh tmux neovim fzf ripgrep bat btop lsd fastfetch
     nodejs postgresql-libs
-    firefox
+    firefox unzip
     docker docker-compose
     upower power-profiles-daemon
     ttf-font-awesome noto-fonts noto-fonts-emoji
@@ -57,10 +57,13 @@ install_yay() {
     rm -rf "$HOME/yay"
 }
 
-install_packages() {
+install_base_packages() {
     sudo pacman -Syu --noconfirm
+    sudo pacman -S --noconfirm --needed "${PKGS_BASE[@]}"
+}
+
+install_packages() {
     sudo pacman -S --noconfirm --needed \
-        "${PKGS_BASE[@]}" \
         "${PKGS_HYPRLAND[@]}" \
         "${PKGS_AUDIO[@]}" \
         "${PKGS_WAYLAND_UTILS[@]}" \
@@ -110,7 +113,7 @@ setup_sddm() {
 }
 
 setup_zsh() {
-    chsh -s "$(which zsh)" "$CURRENT_USER"
+    sudo usermod -s "$(which zsh)" "$CURRENT_USER"
 }
 
 setup_rvm() {
@@ -133,6 +136,7 @@ setup_mysql() {
 
 main() {
     echo "Starting bootstrap for $MACHINE..."
+    install_base_packages
     install_yay
     install_packages
     install_gpu_drivers
