@@ -14,6 +14,7 @@ PKGS_BASE=(
     docker docker-compose
     upower power-profiles-daemon
     ttf-font-awesome noto-fonts noto-fonts-emoji
+    v4l-utils obsidian loupe vlc
 )
 
 PKGS_HYPRLAND=(
@@ -23,7 +24,7 @@ PKGS_HYPRLAND=(
     xdg-desktop-portal-hyprland xdg-desktop-portal-gtk xdg-user-dirs
     polkit polkit-gnome
     nwg-look qt5ct qt6ct
-    network-manager-applet wf-recorder dex
+    network-manager-applet wf-recorder dex sddm
 )
 
 PKGS_AUDIO=(
@@ -65,7 +66,7 @@ install_packages() {
         "${PKGS_WAYLAND_UTILS[@]}" \
         "${PKGS_BLUETOOTH[@]}" \
         "${PKGS_FILES[@]}"
-    yay -S --noconfirm ghostty oh-my-posh sddm-git rofi-wayland swayosd beekeeper-studio-bin
+    yay -S --noconfirm ghostty oh-my-posh rofi-wayland swayosd beekeeper-studio-bin discord spotify
 }
 
 install_gpu_drivers() {
@@ -121,6 +122,15 @@ setup_rvm() {
     source "$HOME/.rvm/scripts/rvm"
 }
 
+# Work-specific — remove if not needed
+# Kept in ~/mysql for rebuilds after library updates
+setup_mysql() {
+    git clone https://aur.archlinux.org/mysql.git "$HOME/mysql"
+    cd "$HOME/mysql"
+    makepkg -si --noconfirm
+    cd "$HOME"
+}
+
 main() {
     echo "Starting bootstrap for $MACHINE..."
     install_yay
@@ -133,6 +143,7 @@ main() {
     setup_sddm
     setup_zsh
     setup_rvm
+    setup_mysql
     echo "Bootstrap complete. Reboot before running stow."
 }
 

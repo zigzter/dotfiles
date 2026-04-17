@@ -14,6 +14,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 Add to `/etc/mkinitcpio.conf` MODULES array:
 ```
 MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt filesystems fsck)
 ```
 Then regenerate:
 ```bash
