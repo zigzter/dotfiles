@@ -108,12 +108,25 @@ setup_power() {
     fi
 }
 
+setup_pacman() {
+    sudo sed -i 's/^#ParallelDownloads.*/ParallelDownloads = 5/' /etc/pacman.conf
+    sudo sed -i 's/^#MAKEFLAGS=.*/MAKEFLAGS="-j$(nproc)"/' /etc/makepkg.conf
+}
+
 setup_sddm() {
     sudo systemctl enable sddm
 }
 
 setup_zsh() {
     sudo usermod -s "$(which zsh)" "$CURRENT_USER"
+}
+
+setup_nvm() {
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+    export NVM_DIR="$HOME/.nvm"
+    # shellcheck source=/dev/null
+    source "$NVM_DIR/nvm.sh"
+    nvm install --lts
 }
 
 setup_rvm() {
@@ -128,14 +141,19 @@ setup_rvm() {
 # Work-specific — remove if not needed
 # Kept in ~/mysql for rebuilds after library updates
 setup_mysql() {
+    gpg --keyserver keyserver.ubuntu.com --recv-keys B7B3B788A8D3785C
     git clone https://aur.archlinux.org/mysql.git "$HOME/mysql"
     cd "$HOME/mysql"
     makepkg -si --noconfirm
     cd "$HOME"
+    sudo mysqld --initialize --user=mysql
+    sudo systemctl enable --now mysqld
+    sudo mysql_secure_installation
 }
 
 main() {
     echo "Starting bootstrap for $MACHINE..."
+    setup_pacman
     install_base_packages
     install_yay
     install_packages
@@ -148,6 +166,7 @@ main() {
     setup_zsh
     setup_rvm
     setup_mysql
+    setup_nvm
     echo "Bootstrap complete. Reboot before running stow."
 }
 

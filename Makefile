@@ -1,10 +1,10 @@
 MACHINE := $(shell hostname 2>/dev/null || hostnamectl hostname 2>/dev/null)
-COMMON := nvim tmux zsh bat btop fastfetch ghostty ohmyposh git
+COMMON := nvim tmux zsh bat btop fastfetch ghostty ohmyposh git wallpapers
 
 ifeq ($(MACHINE), MADVILLAIN)
-    CONFIGS = mako hypr hyprlock waybar rofi
+    CONFIGS = hypr waybar
 else ifeq ($(MACHINE), DANGERDOOM)
-    CONFIGS = mako hypr hyprlock waybar rofi
+    CONFIGS = hypr waybar
 else
     $(error Unknown machine type: $(MACHINE))
 endif
