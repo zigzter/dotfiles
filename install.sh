@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-MACHINE=$(hostname)
+MACHINE=$(hostnamectl hostname)
 CURRENT_USER=$(whoami)
 NERD_FONTS_VERSION="v3.2.0"
 
@@ -151,6 +151,10 @@ setup_mysql() {
     sudo mysql_secure_installation
 }
 
+setup_tmux() {
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+}
+
 main() {
     echo "Starting bootstrap for $MACHINE..."
     setup_pacman
@@ -167,6 +171,7 @@ main() {
     setup_rvm
     setup_mysql
     setup_nvm
+    setup_tmux
     echo "Bootstrap complete. Reboot before running stow."
 }
 
