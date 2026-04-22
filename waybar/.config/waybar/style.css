@@ -52,6 +52,19 @@ window#waybar {
   letter-spacing: 0.04em;
 }
 
+#mpris {
+  color: #7c6f64;
+  padding: 0 12px;
+}
+
+#mpris.playing {
+  color: #a89984;
+}
+
+#mpris.paused {
+  color: #504945;
+}
+
 /* Right-side modules */
 #battery,
 #cpu,
@@ -59,9 +72,19 @@ window#waybar {
 #backlight,
 #network,
 #pulseaudio,
+#bluetooth,
+#idle_inhibitor,
 #tray {
   padding: 0 10px;
   color: #7c6f64;
+}
+
+#idle_inhibitor.activated {
+  color: #fabd2f;
+}
+
+#bluetooth.connected {
+  color: #83a598;
 }
 
 #pulseaudio {
