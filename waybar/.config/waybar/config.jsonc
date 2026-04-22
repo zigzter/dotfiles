@@ -1,8 +1,12 @@
 {
   "layer": "top",
+  "reload_style_on_change": true,
   "position": "top",
-  "height": 35,
-  "spacing": 4,
+  "height": 32,
+  "spacing": 0,
+  "margin-top": 6,
+  "margin-left": 8,
+  "margin-right": 8,
   "modules-left": [
     "hyprland/workspaces"
   ],
@@ -31,26 +35,23 @@
       "default": ""
     },
     "persistent_workspaces": {
-      "*": 3 // Show at least 3 workspaces
+      "*": 3
     }
   },
   "clock": {
-    "format": " {:%H:%M}",
+    "format": "{:%a %I:%M %p}",
+    "format-alt": "{:%B %d, %Y}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "backlight": {
     "format": "{icon} {percent}%",
-    "format-icons": [
-      "󰃞",
-      "󰃟",
-      "󰃠"
-    ]
+    "format-icons": ["󰃞", "󰃟", "󰃠"]
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-bluetooth": "{icon} {volume}%",
     "format-bluetooth-muted": "󰖁 {icon}",
-    "format-muted": "󰖁 {volume}%",
+    "format-muted": "󰖁",
     "format-source": "󰍬 {volume}%",
     "format-source-muted": "󰍭",
     "format-icons": {
@@ -60,27 +61,25 @@
       "phone": "󰄜",
       "portable": "󰦧",
       "car": "󰄋",
-      "default": [
-        "󰕿",
-        "󰖀",
-        "󰕾"
-      ]
+      "default": ["󰕿", "󰖀", "󰕾"]
     },
     "on-click": "pavucontrol"
   },
   "network": {
     "format-wifi": "󰤨 {signalStrength}%",
-    "format-ethernet": "󰈀 {ipaddr}",
-    "format-linked": "󰤭 {ifname} (No IP)",
-    "format-disconnected": "󰤮 Disconnected",
+    "format-ethernet": "󰈀",
+    "format-linked": "󰤮 (No IP)",
+    "format-disconnected": "󰤮",
     "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
   },
   "cpu": {
     "format": "󰘚 {usage}%",
+    "interval": 5,
     "tooltip": false
   },
   "memory": {
-    "format": "󰍛 {}%"
+    "format": "󰍛 {percentage}%",
+    "interval": 5
   },
   "battery": {
     "states": {
@@ -88,17 +87,11 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "{capacity}% {icon}",
-    "format-charging": "{capacity}% ",
-    "format-plugged": "{capacity}% ",
-    "format-alt": "{time} {icon}",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "tooltip-format": "{timeTo} - {power}W"
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{icon} {time}",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip-format": "{timeTo} · {power}W"
   }
 }
