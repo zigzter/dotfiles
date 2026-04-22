@@ -79,6 +79,32 @@ window#waybar {
   color: #7c6f64;
 }
 
+#privacy {
+  padding: 0;
+  margin: 0 2px;
+}
+
+#privacy-item {
+  padding: 0 8px;
+  margin: 3px 2px;
+  border-radius: 8px;
+}
+
+#privacy-item.screenshare {
+  color: #fb4934;
+  background-color: rgba(251, 73, 52, 0.15);
+}
+
+#privacy-item.audio-in {
+  color: #fabd2f;
+  background-color: rgba(250, 189, 47, 0.15);
+}
+
+#privacy-item.camera {
+  color: #fe8019;
+  background-color: rgba(254, 128, 25, 0.15);
+}
+
 #idle_inhibitor.activated {
   color: #fabd2f;
 }
