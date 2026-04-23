@@ -79,7 +79,7 @@ install_packages() {
         "${PKGS_WAYLAND_UTILS[@]}" \
         "${PKGS_BLUETOOTH[@]}" \
         "${PKGS_FILES[@]}"
-    yay -S --noconfirm ghostty oh-my-posh rofi-wayland swayosd beekeeper-studio-bin discord spotify
+    yay -S --noconfirm ghostty oh-my-posh rofi-wayland swayosd datagrip datagrip-jre discord spotify
 }
 
 install_gpu_drivers() {

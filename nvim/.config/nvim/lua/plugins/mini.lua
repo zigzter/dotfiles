@@ -9,7 +9,6 @@ return {
         require("mini.comment").setup()
         require("mini.pairs").setup()
         require("mini.ai").setup()
-        require("mini.files").setup()
         require("mini.hipatterns").setup({
             highlighters = {
                 fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
