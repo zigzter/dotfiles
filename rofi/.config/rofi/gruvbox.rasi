@@ -1,0 +1,127 @@
+* {
+    font:     "JetBrainsMono Nerd Font Mono 13";
+
+    bg:       rgba ( 40, 40, 40, 93 % );
+    bg1:      rgba ( 60, 56, 54, 60 % );
+    bg-hover: rgba ( 80, 73, 69, 35 % );
+    fg:       #ebdbb2;
+    fg-dim:   #a89984;
+    fg-muted: #7c6f64;
+    yellow:   #fabd2f;
+    blue:     #83a598;
+    blue-sel: rgba ( 131, 165, 152, 15 % );
+
+    background-color: transparent;
+    text-color:       @fg;
+}
+
+window {
+    background-color: @bg;
+    border:           0px;
+    border-radius:    10px;
+    width:            700px;
+}
+
+mainbox {
+    background-color: transparent;
+    children:         [ inputbar, listview ];
+    spacing:          0;
+    padding:          6px;
+}
+
+inputbar {
+    background-color: @bg1;
+    border-radius:    8px;
+    padding:          10px 12px;
+    spacing:          8px;
+    margin:           0px 0px 6px 0px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    background-color: transparent;
+    text-color:       @yellow;
+    vertical-align:   0.5;
+}
+
+entry {
+    background-color:  transparent;
+    text-color:        @fg-dim;
+    placeholder:       "Search...";
+    placeholder-color: @fg-muted;
+    vertical-align:    0.5;
+}
+
+listview {
+    background-color: transparent;
+    padding:          0px;
+    spacing:          2px;
+    lines:            10;
+    scrollbar:        false;
+}
+
+element {
+    background-color: transparent;
+    text-color:       @fg-muted;
+    padding:          8px 10px;
+    border-radius:    8px;
+    spacing:          8px;
+    children:         [ element-icon, element-text ];
+}
+
+element-icon {
+    background-color: transparent;
+    size:             22px;
+    vertical-align:   0.5;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    vertical-align:   0.5;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color:       @fg-muted;
+}
+
+element normal.urgent {
+    background-color: transparent;
+    text-color:       @yellow;
+}
+
+element normal.active {
+    background-color: transparent;
+    text-color:       @blue;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color:       @fg-muted;
+}
+
+element alternate.urgent {
+    background-color: transparent;
+    text-color:       @yellow;
+}
+
+element alternate.active {
+    background-color: transparent;
+    text-color:       @blue;
+}
+
+element selected.normal {
+    background-color: @blue-sel;
+    text-color:       @blue;
+}
+
+element selected.urgent {
+    background-color: rgba ( 250, 189, 47, 10 % );
+    text-color:       @yellow;
+}
+
+element selected.active {
+    background-color: @blue-sel;
+    text-color:       @blue;
+}

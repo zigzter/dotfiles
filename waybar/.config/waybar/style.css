@@ -109,6 +109,15 @@ window#waybar {
   color: #fabd2f;
 }
 
+#custom-notification {
+  color: #7c6f64;
+  padding: 0 10px;
+}
+
+#custom-notification.notification {
+  color: #fabd2f;
+}
+
 #bluetooth.connected {
   color: #83a598;
 }

@@ -29,7 +29,7 @@ PKGS_BASE=(
 PKGS_HYPRLAND=(
     hyprland waybar hyprpaper hyprlock
     qt5-wayland qt6-wayland qt6-svg qt6-declarative
-    mako
+    swaync
     xdg-desktop-portal-hyprland xdg-desktop-portal-gtk xdg-user-dirs
     polkit polkit-gnome
     nwg-look qt5ct qt6ct

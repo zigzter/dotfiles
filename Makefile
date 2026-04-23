@@ -1,5 +1,5 @@
 MACHINE := $(shell hostname 2>/dev/null || hostnamectl hostname 2>/dev/null)
-COMMON := nvim tmux zsh bat btop fastfetch ghostty ohmyposh git wallpapers
+COMMON := nvim tmux zsh bat btop fastfetch ghostty ohmyposh git wallpapers rofi swaync
 
 ifeq ($(MACHINE), MADVILLAIN)
     CONFIGS = hypr waybar
