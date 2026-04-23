@@ -19,7 +19,8 @@ PKGS_BASE=(
     man-db man-pages
     zsh tmux neovim fzf ripgrep bat btop lsd fastfetch
     nodejs postgresql-libs
-    firefox unzip
+    python python-pip python-virtualenv
+    firefox unzip jq
     docker docker-compose
     upower power-profiles-daemon
     ttf-font-awesome noto-fonts noto-fonts-emoji
@@ -184,6 +185,18 @@ setup_secureboot() {
     sudo sbctl verify
 }
 
+harden() {
+    local faildelay_line='auth optional pam_faildelay.so delay=4000000'
+    grep -qxF "$faildelay_line" /etc/pam.d/system-login || \
+        echo "$faildelay_line" | sudo tee -a /etc/pam.d/system-login > /dev/null
+    echo 'PermitRootLogin no' | sudo tee /etc/ssh/sshd_config.d/20-deny_root.conf > /dev/null
+    sudo pacman -S --noconfirm --needed ufw
+    sudo ufw default deny incoming
+    sudo ufw default allow outgoing
+    sudo ufw enable
+    sudo systemctl enable --now ufw
+}
+
 main() {
     echo "Starting bootstrap for $MACHINE..."
     setup_pacman
@@ -202,5 +215,6 @@ main() {
     setup_nvm
     setup_tmux
     setup_secureboot
+    harden
     echo "Bootstrap complete. Reboot before running stow."
 }

@@ -31,7 +31,8 @@ blankwindow {
   background: transparent;
 }
 
-.floating-notifications .notification {
+.floating-notifications .notification-row .notification-background .notification {
+  background: rgb(40, 40, 40);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
