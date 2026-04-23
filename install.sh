@@ -1,6 +1,15 @@
 #!/bin/bash
 set -e
 
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo "Usage: source this script, then call a function."
+    echo ""
+    echo "  source install.sh"
+    echo "  main                # full bootstrap"
+    echo "  setup_secureboot    # Secure Boot setup only"
+    exit 1
+fi
+
 MACHINE=$(hostnamectl hostname)
 CURRENT_USER=$(whoami)
 NERD_FONTS_VERSION="v3.2.0"
@@ -155,6 +164,26 @@ setup_tmux() {
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
+setup_secureboot() {
+    [[ "$MACHINE" != "DANGERDOOM" ]] && return
+    sudo pacman -S --noconfirm --needed sbctl
+    # Key enrollment requires Secure Boot Setup Mode — clear keys in UEFI firmware first
+    if ! sudo sbctl status | grep -q "Setup Mode.*Enabled"; then
+        echo "WARNING: Secure Boot Setup Mode is not active."
+        echo "Enter UEFI firmware settings, clear existing Secure Boot keys to enable Setup Mode, then re-run."
+        return 1
+    fi
+    sudo sbctl create-keys
+    # --microsoft retains Microsoft's keys so Windows 11 can still boot
+    sudo sbctl enroll-keys --microsoft
+    # -s saves paths to sbctl's DB so the pacman hook re-signs on kernel/bootloader updates
+    sudo sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
+    sudo sbctl sign -s /boot/grub/x86_64-efi/grubx64.efi
+    sudo sbctl sign -s /boot/vmlinuz-linux
+    # Show any unsigned binaries that still need attention
+    sudo sbctl verify
+}
+
 main() {
     echo "Starting bootstrap for $MACHINE..."
     setup_pacman
@@ -172,7 +201,6 @@ main() {
     setup_mysql
     setup_nvm
     setup_tmux
+    setup_secureboot
     echo "Bootstrap complete. Reboot before running stow."
 }
-
-main
