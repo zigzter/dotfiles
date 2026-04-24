@@ -16,7 +16,7 @@ NERD_FONTS_VERSION="v3.2.0"
 
 PKGS_BASE=(
     git stow openssh which
-    man-db man-pages
+    man-db man-pages networkmanager-dmenu
     zsh tmux neovim fzf ripgrep bat btop lsd fastfetch
     nodejs postgresql-libs
     python python-pip python-virtualenv

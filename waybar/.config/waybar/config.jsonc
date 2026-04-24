@@ -16,7 +16,6 @@
   ],
   "modules-right": [
     "custom/notification",
-    "tray",
     "idle_inhibitor",
     "bluetooth",
     "backlight",
@@ -35,6 +34,7 @@
       "3": "",
       "5": "",
       "6": "",
+      "8": "󱞁",
       "urgent": "",
       "focused": "",
       "default": ""
@@ -58,7 +58,7 @@
     "on-click": "playerctl play-pause"
   },
   "clock": {
-    "format": "{:%a %I:%M %p}",
+    "format": "{:%a %b %d - %I:%M %p}",
     "format-alt": "{:%B %d, %Y}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
@@ -83,7 +83,6 @@
       "headset": "󰋎",
       "phone": "󰄜",
       "portable": "󰦧",
-      "car": "󰄋",
       "default": [
         "󰕿",
         "󰖀",
@@ -95,9 +94,11 @@
   "network": {
     "format-wifi": "󰤨 {signalStrength}%",
     "format-ethernet": "󰈀",
-    "format-linked": "󰤮 (No IP)",
+    "format-linked": "󰤮 No IP",
     "format-disconnected": "󰤮",
-    "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) · {ipaddr}",
+    "tooltip-format-ethernet": "{ifname} · {ipaddr}/{cidr} · {bandwidthUpBits} up {bandwidthDownBits} down",
+    "on-click": "networkmanager_dmenu"
   },
   "cpu": {
     "format": "󰘚 {usage}%",

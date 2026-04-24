@@ -28,6 +28,7 @@ window#waybar {
 #workspaces button:hover {
   background: rgba(80, 73, 69, 0.35);
   color: #a89984;
+  box-shadow: none;
 }
 
 #workspaces button.active {
@@ -156,16 +157,3 @@ window#waybar {
   to { color: rgba(251, 73, 52, 0.4); }
 }
 
-#tray {
-  padding: 0 8px;
-}
-
-#tray > .passive {
-  -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-  -gtk-icon-effect: highlight;
-  background-color: rgba(251, 73, 52, 0.2);
-  border-radius: 4px;
-}
