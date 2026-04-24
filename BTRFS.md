@@ -22,6 +22,7 @@ mount /dev/mapper/cryptroot /mnt
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@snapshots
+btrfs subvolume create /mnt/@home_snapshots
 btrfs subvolume create /mnt/@var_log
 btrfs subvolume create /mnt/@var_cache
 umount /mnt
@@ -31,8 +32,10 @@ umount /mnt
 ```bash
 mount -o noatime,compress=zstd,subvol=@ /dev/mapper/cryptroot /mnt
 mkdir -p /mnt/{home,.snapshots,var/log,var/cache,boot/efi}
+mkdir -p /mnt/home/.snapshots
 mount -o noatime,compress=zstd,subvol=@home /dev/mapper/cryptroot /mnt/home
 mount -o noatime,compress=zstd,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots
+mount -o noatime,compress=zstd,subvol=@home_snapshots /dev/mapper/cryptroot /mnt/home/.snapshots
 mount -o noatime,compress=zstd,subvol=@var_log /dev/mapper/cryptroot /mnt/var/log
 mount -o noatime,compress=zstd,subvol=@var_cache /dev/mapper/cryptroot /mnt/var/cache
 mount /dev/sdX1 /mnt/boot/efi
@@ -72,13 +75,36 @@ grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 ## Snapper
+Install packages:
 ```bash
-pacman -S snapper snap-pac grub-btrfs
-snapper -c root create-config /
-snapper -c home create-config /home
+pacman -S snapper snap-pac grub-btrfs inotify-tools
+```
+
+`create-config` will fail because `@snapshots` and `@home_snapshots` subvolumes already exist from the Btrfs setup. Create configs manually instead:
+```bash
+cp /usr/share/snapper/config-templates/default /etc/snapper/configs/root
+cp /usr/share/snapper/config-templates/default /etc/snapper/configs/home
+```
+
+Edit `/etc/snapper/configs/root` and set `SUBVOLUME="/"`.
+Edit `/etc/snapper/configs/home` and set `SUBVOLUME="/home"`.
+
+Register both configs:
+```bash
+echo 'SNAPPER_CONFIGS="root home"' > /etc/conf.d/snapper
+```
+
+Enable timers:
+```bash
 systemctl enable --now snapper-timeline.timer
 systemctl enable --now snapper-cleanup.timer
 systemctl enable --now grub-btrfsd
+```
+
+Verify both configs work:
+```bash
+snapper -c root list
+snapper -c home list
 ```
 
 ## Snapper Config Tweaks
