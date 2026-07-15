@@ -78,6 +78,8 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 bindkey '^R' history-incremental-search-backward
+# emacs mode, allow terminal movement mappings like Ctrl+a/e to work in tmux
+bindkey -e
 
 export HISTFILE="$HOME/.zhistory"       # History filepath
 export HISTSIZE=10000                   # Maximum events for internal history
