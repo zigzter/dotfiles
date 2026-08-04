@@ -114,5 +114,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# Lets Node resolve globally-installed packages (e.g. peer deps a project forgot to declare)
+[ -n "$NVM_BIN" ] && export NODE_PATH="${NVM_BIN%/bin}/lib/node_modules"
+
 . "$HOME/.local/bin/env"
 export PATH="$HOME/.local/bin:$PATH"

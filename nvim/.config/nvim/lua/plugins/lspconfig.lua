@@ -73,7 +73,7 @@ return {
       capabilities = capabilities,
       init_options = {
         typescript = {
-          tsdk = vim.fn.expand('~/.nvm/versions/node/v18.20.6/lib/node_modules/typescript/lib/')
+          tsdk = vim.fn.trim(vim.fn.system('npm root -g')) .. '/typescript/lib'
         }
       }
     })
