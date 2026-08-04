@@ -1,0 +1,12 @@
+[SddmGreeterTheme]
+Name=gruvbox-material
+Description=Minimal Gruvbox Material theme for SDDM
+Author=ziggy
+Copyright=(c) 2026, ziggy
+License=MIT
+Type=sddm-theme
+Version=1.0
+MainScript=Main.qml
+ConfigFile=theme.conf
+Theme-Id=gruvbox-material
+Theme-API=2.0

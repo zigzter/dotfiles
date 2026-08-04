@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     echo "Usage: source this script, then call a function."
@@ -13,6 +12,7 @@ fi
 MACHINE=$(hostnamectl hostname)
 CURRENT_USER=$(whoami)
 NERD_FONTS_VERSION="v3.2.0"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 PKGS_BASE=(
     git stow openssh which
@@ -55,7 +55,12 @@ PKGS_FILES=(
     thunar gvfs gvfs-smb
 )
 
-install_yay() {
+# Every function below runs in a subshell ( ... ) rather than { ... }, with its own
+# `set -e`. A failure aborts only that function's remaining steps — it can never
+# propagate up and kill the interactive shell this script is sourced into.
+
+install_yay() (
+    set -e
     if command -v yay &>/dev/null; then
         echo "yay already installed, skipping..."
         return
@@ -65,14 +70,16 @@ install_yay() {
     makepkg -si --noconfirm
     cd "$HOME"
     rm -rf "$HOME/yay"
-}
+)
 
-install_base_packages() {
+install_base_packages() (
+    set -e
     sudo pacman -Syu --noconfirm
     sudo pacman -S --noconfirm --needed "${PKGS_BASE[@]}"
-}
+)
 
-install_packages() {
+install_packages() (
+    set -e
     sudo pacman -S --noconfirm --needed \
         "${PKGS_HYPRLAND[@]}" \
         "${PKGS_AUDIO[@]}" \
@@ -80,17 +87,19 @@ install_packages() {
         "${PKGS_BLUETOOTH[@]}" \
         "${PKGS_FILES[@]}"
     yay -S --noconfirm ghostty oh-my-posh rofi-wayland swayosd datagrip datagrip-jre discord spotify
-}
+)
 
-install_gpu_drivers() {
+install_gpu_drivers() (
+    set -e
     if [[ "$MACHINE" == "DANGERDOOM" ]]; then
         sudo pacman -S --noconfirm --needed nvidia nvidia-utils nvidia-settings
     elif [[ "$MACHINE" == "MADVILLAIN" ]]; then
         sudo pacman -S --noconfirm --needed mesa vulkan-intel intel-media-driver
     fi
-}
+)
 
-install_fonts() {
+install_fonts() (
+    set -e
     local tmp_dir
     tmp_dir=$(mktemp -d)
     mkdir -p "$HOME/.local/share/fonts"
@@ -100,57 +109,73 @@ install_fonts() {
     mv "$tmp_dir/jetbrains/"*.ttf "$HOME/.local/share/fonts/"
     rm -rf "$tmp_dir"
     fc-cache -fv
-}
+)
 
-setup_docker() {
+setup_docker() (
+    set -e
     sudo usermod -aG docker "$CURRENT_USER"
     sudo systemctl enable --now docker
-}
+)
 
-setup_bluetooth() {
+setup_bluetooth() (
+    set -e
     sudo systemctl enable --now bluetooth
-}
+)
 
-setup_power() {
+setup_power() (
+    set -e
     sudo systemctl enable --now power-profiles-daemon
     if [[ "$MACHINE" == "MADVILLAIN" ]]; then
         sudo pacman -S --noconfirm --needed brightnessctl
     fi
-}
+)
 
-setup_pacman() {
+setup_pacman() (
+    set -e
     sudo sed -i 's/^#ParallelDownloads.*/ParallelDownloads = 5/' /etc/pacman.conf
     sudo sed -i 's/^#MAKEFLAGS=.*/MAKEFLAGS="-j$(nproc)"/' /etc/makepkg.conf
-}
+)
 
-setup_sddm() {
+setup_sddm() (
+    set -e
     sudo systemctl enable sddm
-}
+)
 
-setup_zsh() {
+setup_sddm_theme() (
+    set -e
+    sudo ln -sfn "$SCRIPT_DIR/sddm/gruvbox-material" /usr/share/sddm/themes/gruvbox-material
+    sudo mkdir -p /etc/sddm.conf.d
+    printf '[Theme]\nCurrent=gruvbox-material\n' | sudo tee /etc/sddm.conf.d/theme.conf > /dev/null
+)
+
+setup_zsh() (
+    set -e
     sudo usermod -s "$(which zsh)" "$CURRENT_USER"
-}
+)
 
-setup_nvm() {
+setup_nvm() (
+    set -e
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
     export NVM_DIR="$HOME/.nvm"
     # shellcheck source=/dev/null
     source "$NVM_DIR/nvm.sh"
     nvm install --lts
-}
+)
 
-setup_rvm() {
+setup_rvm() (
+    set -e
     gpg2 --keyserver keyserver.ubuntu.com --recv-keys \
         409B6B1796C275462A1703113804BB82D39DC0E3 \
         7D2BAF1CF37B13E2069D6956105BD0E739499BDB
     curl -sSL https://get.rvm.io | bash -s stable
     # shellcheck source=/dev/null
     source "$HOME/.rvm/scripts/rvm"
-}
+)
 
 # Work-specific — remove if not needed
 # Kept in ~/mysql for rebuilds after library updates
-setup_mysql() {
+setup_mysql() (
+    set -e
     gpg --keyserver keyserver.ubuntu.com --recv-keys B7B3B788A8D3785C
     git clone https://aur.archlinux.org/mysql.git "$HOME/mysql"
     cd "$HOME/mysql"
@@ -159,13 +184,15 @@ setup_mysql() {
     sudo mysqld --initialize --user=mysql
     sudo systemctl enable --now mysqld
     sudo mysql_secure_installation
-}
+)
 
-setup_tmux() {
+setup_tmux() (
+    set -e
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-}
+)
 
-setup_secureboot() {
+setup_secureboot() (
+    set -e
     [[ "$MACHINE" != "DANGERDOOM" ]] && return
     sudo pacman -S --noconfirm --needed sbctl
     # Key enrollment requires Secure Boot Setup Mode — clear keys in UEFI firmware first
@@ -183,9 +210,10 @@ setup_secureboot() {
     sudo sbctl sign -s /boot/vmlinuz-linux
     # Show any unsigned binaries that still need attention
     sudo sbctl verify
-}
+)
 
-harden() {
+harden() (
+    set -e
     local faildelay_line='auth optional pam_faildelay.so delay=4000000'
     grep -qxF "$faildelay_line" /etc/pam.d/system-login || \
         echo "$faildelay_line" | sudo tee -a /etc/pam.d/system-login > /dev/null
@@ -195,9 +223,10 @@ harden() {
     sudo ufw default allow outgoing
     sudo ufw enable
     sudo systemctl enable --now ufw
-}
+)
 
-main() {
+main() (
+    set -e
     echo "Starting bootstrap for $MACHINE..."
     setup_pacman
     install_base_packages
@@ -209,6 +238,7 @@ main() {
     setup_bluetooth
     setup_power
     setup_sddm
+    setup_sddm_theme
     setup_zsh
     setup_rvm
     setup_mysql
@@ -217,4 +247,4 @@ main() {
     setup_secureboot
     harden
     echo "Bootstrap complete. Reboot before running stow."
-}
+)
