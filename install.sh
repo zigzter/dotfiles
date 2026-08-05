@@ -20,7 +20,7 @@ PKGS_BASE=(
     zsh tmux neovim fzf ripgrep bat btop lsd fastfetch
     nodejs postgresql-libs
     python python-pip python-virtualenv
-    firefox unzip jq
+    firefox unzip jq zoxide
     docker docker-compose
     upower power-profiles-daemon
     ttf-font-awesome noto-fonts noto-fonts-emoji
@@ -143,7 +143,9 @@ setup_sddm() (
 
 setup_sddm_theme() (
     set -e
-    sudo ln -sfn "$SCRIPT_DIR/sddm/gruvbox-material" /usr/share/sddm/themes/gruvbox-material
+    sudo cp -r "$SCRIPT_DIR/sddm/gruvbox-material" /usr/share/sddm/themes/gruvbox-material
+    sudo chown -R root:root /usr/share/sddm/themes/gruvbox-material
+    sudo chmod -R a+rX /usr/share/sddm/themes/gruvbox-material
     sudo mkdir -p /etc/sddm.conf.d
     printf '[Theme]\nCurrent=gruvbox-material\n' | sudo tee /etc/sddm.conf.d/theme.conf > /dev/null
 )

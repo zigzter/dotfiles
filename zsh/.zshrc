@@ -6,15 +6,12 @@ if [ ! -d "$ZINIT_HOME" ]; then
 fi
 source "${ZINIT_HOME}/zinit.zsh"
 
-zinit ice from"gh-r" as"command" pick"oh-my-posh"
-zinit light JanDeDobbeleer/oh-my-posh
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-# There's probably a better way to do this
-alias oh-my-posh="$HOME/.local/share/zinit/plugins/JanDeDobbeleer---oh-my-posh/posh-linux-amd64"
+# oh-my-posh is installed via yay (see install.sh), already on PATH
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/base.json)"
 
 autoload -U compinit && compinit
@@ -32,12 +29,14 @@ alias tma='tmux attach -t'
 alias ls='lsd'
 alias la='ls -lah'
 alias cat=bat
-alias vim=nvim
 alias ff=fastfetch
 alias se='SUDO_EDITOR=nvim sudoedit'
 alias syu='sudo pacman -Syu'
 alias pacclean='sudo paccache -rk 2'
 alias tmn='~/tmux-new.sh'
+alias cc='claude'
+alias ccu='claude update'
+alias ccr='claude --resume'
 
 # Get top 5 size offenders
 sizing() {
@@ -98,7 +97,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd $realpath'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin:/bin/rg:/opt/cuda/bin/nvcc:$HOME/projects/break-check:~/go/bin:~/nvim-linux64/bin/:~/.local/share/nvim/mason/bin/:$HOME/.ebcli-virtual-env/executables"
+export PATH="$PATH:$HOME/.rvm/bin:/bin:/opt/cuda/bin:$HOME/projects/break-check:$HOME/go/bin:$HOME/nvim-linux64/bin:$HOME/.local/share/nvim/mason/bin:$HOME/.ebcli-virtual-env/executables"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -107,6 +106,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
+command -v zoxide &>/dev/null && alias cd=z
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -117,5 +117,3 @@ export NVM_DIR="$HOME/.nvm"
 # Lets Node resolve globally-installed packages (e.g. peer deps a project forgot to declare)
 [ -n "$NVM_BIN" ] && export NODE_PATH="${NVM_BIN%/bin}/lib/node_modules"
 
-. "$HOME/.local/bin/env"
-export PATH="$HOME/.local/bin:$PATH"
