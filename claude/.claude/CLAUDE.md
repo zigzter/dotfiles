@@ -1,7 +1,6 @@
 # Global Claude Instructions
 
 ## Environment
-
 - OS: Arch Linux
 - Shell: zsh (zinit, oh-my-posh)
 - WM: Hyprland
@@ -9,16 +8,14 @@
 - Terminal: Ghostty + tmux
 
 ## Available tools
-
 - `rg` for search — prefer over `grep`
 - `lsd` aliased as `ls`, `bat` aliased as `cat`
 - `fzf`, `zoxide` for navigation
 - `jq` for JSON
 
 ## Coding guidelines
-
 - No comments unless the WHY is non-obvious (a hidden constraint, workaround, or surprising behaviour)
-- No unnecessary abstractions — three similar lines beats a premature helper
+- No unnecessary abstractions - three similar lines beats a premature helper
 - No boilerplate error handling for things that can't fail; only validate at system boundaries
 - Trust the type system and framework; don't add defensive guards for internal code paths
 - Prefer readability over conciseness
@@ -40,7 +37,6 @@ NVM manages Node versions.
 pyenv manages versions.
 
 ## Git
-
 - Short, descriptive commit messages
 - Rebase local branches rather than creating merge commits
 - Stage specific files rather than `git add -A`
