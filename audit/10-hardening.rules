@@ -1,0 +1,26 @@
+# Installed to /etc/audit/rules.d/hardening.rules by setup_audit in install.sh.
+# __HOME__ is substituted at install time.
+#
+# -F dir=  matches the whole subtree beneath a directory.
+# -F path= matches one exact inode, so it is only correct for single files.
+# Using path= on a directory silently watches the directory inode alone and
+# misses every file inside it.
+
+# augenrules appends to the live kernel ruleset rather than replacing it, so
+# without -D a reload fails with "Rule exists" on every unchanged rule. This
+# file is numbered 10- so -D always runs before any rules added later.
+-D
+-b 8192
+
+## Credential access
+-a always,exit -F arch=b64 -F dir=__HOME__/.ssh -F perm=rwa -k ssh_files
+-a always,exit -F arch=b64 -F dir=__HOME__/.aws -F perm=rwa -k aws_creds
+-a always,exit -F arch=b64 -F path=__HOME__/.npmrc -F perm=wa -k npmrc
+
+## Scheduled-job and unit persistence
+-a always,exit -F arch=b64 -F path=/etc/crontab -F perm=wa -k cron_files
+-a always,exit -F arch=b64 -F dir=/etc/cron.d -F perm=wa -k cron_files
+-a always,exit -F arch=b64 -F dir=/var/spool/cron -F perm=wa -k cron_files
+-a always,exit -F arch=b64 -F dir=/etc/systemd/system -F perm=wa -k unit_files
+# the parent, not hooks/ itself, so that creating a hooks dir is also caught
+-a always,exit -F arch=b64 -F dir=/etc/pacman.d -F perm=wa -k pacman_hooks

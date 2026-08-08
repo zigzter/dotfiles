@@ -116,4 +116,4 @@ export NVM_DIR="$HOME/.nvm"
 
 # Lets Node resolve globally-installed packages (e.g. peer deps a project forgot to declare)
 [ -n "$NVM_BIN" ] && export NODE_PATH="${NVM_BIN%/bin}/lib/node_modules"
-
+export PATH="$HOME/.local/bin:$PATH"

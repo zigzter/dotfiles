@@ -1,6 +1,4 @@
 {
-  "theme": "dark",
-  "tui": "fullscreen",
   "permissions": {
     "allow": [
       "Read",
@@ -41,5 +39,8 @@
       "Bash(rsync *--delete*)",
       "Bash(npm publish*)"
     ]
-  }
+  },
+  "tui": "fullscreen",
+  "theme": "dark",
+  "model": "sonnet"
 }
