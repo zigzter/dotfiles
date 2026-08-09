@@ -1,6 +1,7 @@
-# Never stow audit/, sddm/ or scripts/ — they have no .config/ layer because they
-# target /etc, /usr/share and PATH, so stow would drop their contents loose into
-# $HOME. install.sh owns them (setup_audit, setup_sddm_theme).
+# Never stow audit/, sddm/ or scripts/ — none has a .config/ layer, so stow drops
+# their contents loose into $HOME rather than creating the directory. install.sh
+# copies the first two into /etc and /usr/share (setup_audit, setup_sddm_theme);
+# scripts/ is just run in place.
 MACHINE := $(shell hostname 2>/dev/null || hostnamectl hostname 2>/dev/null)
 COMMON := nvim tmux zsh bat btop fastfetch ghostty ohmyposh git wallpapers rofi swaync claude pacman
 

@@ -171,8 +171,10 @@ setup_sddm_theme() (
     local theme
     theme=$(find_asset sddm/gruvbox-material)
     # -L because a stowed tree is symlinks all the way down; a plain -r would copy
-    # links pointing back into $HOME, which sddm can't read as the sddm user
-    sudo cp -rL "$theme" /usr/share/sddm/themes/gruvbox-material
+    # links pointing back into $HOME, which sddm can't read as the sddm user.
+    # -T because without it a re-run copies *into* the existing theme dir, giving
+    # gruvbox-material/gruvbox-material and a theme sddm can no longer find.
+    sudo cp -rLT "$theme" /usr/share/sddm/themes/gruvbox-material
     sudo chown -R root:root /usr/share/sddm/themes/gruvbox-material
     sudo chmod -R a+rX /usr/share/sddm/themes/gruvbox-material
     sudo mkdir -p /etc/sddm.conf.d
@@ -205,11 +207,16 @@ setup_rvm() (
 
 setup_mysql() (
     set -e
+    if command -v mysqld &>/dev/null; then
+        echo "mysql already installed, skipping..."
+        return
+    fi
     gpg --keyserver keyserver.ubuntu.com --recv-keys B7B3B788A8D3785C
     git clone https://aur.archlinux.org/mysql.git "$HOME/mysql"
     cd "$HOME/mysql"
     makepkg -si --noconfirm
     cd "$HOME"
+    rm -rf "$HOME/mysql"
     sudo mysqld --initialize --user=mysql
     sudo systemctl enable --now mysqld
     sudo mysql_secure_installation
@@ -217,7 +224,11 @@ setup_mysql() (
 
 setup_tmux() (
     set -e
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    if [[ -d "$HOME/.tmux/plugins/tpm" ]]; then
+        echo "tpm already installed, skipping..."
+        return
+    fi
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 )
 
 setup_secureboot() (
