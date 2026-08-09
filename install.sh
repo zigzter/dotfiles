@@ -14,6 +14,24 @@ CURRENT_USER=$(whoami)
 NERD_FONTS_VERSION="v3.2.0"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# audit/ and sddm/ aren't stow packages — they install to /etc and /usr/share, not
+# $HOME — so their files turn up in one of three places depending on how the script
+# got here: beside it in a clone, in a clone elsewhere while the script was curled
+# to $HOME on its own (reinstall guide §11), or flattened into $HOME root by a stray
+# `stow audit` / `stow sddm`, which drops the package's contents rather than the
+# package itself.
+find_asset() {
+    local rel="$1" candidate
+    for candidate in "$SCRIPT_DIR/$rel" "$HOME/dotfiles/$rel" "$HOME/${rel##*/}"; do
+        if [[ -e "$candidate" ]]; then
+            printf '%s\n' "$candidate"
+            return
+        fi
+    done
+    echo "ERROR: could not locate $rel. Looked beside the script ($SCRIPT_DIR), in \$HOME/dotfiles, and in \$HOME." >&2
+    return 1
+}
+
 PKGS_BASE=(
     git stow openssh which
     man-db man-pages networkmanager-dmenu
@@ -150,7 +168,11 @@ setup_sddm() (
 
 setup_sddm_theme() (
     set -e
-    sudo cp -r "$SCRIPT_DIR/sddm/gruvbox-material" /usr/share/sddm/themes/gruvbox-material
+    local theme
+    theme=$(find_asset sddm/gruvbox-material)
+    # -L because a stowed tree is symlinks all the way down; a plain -r would copy
+    # links pointing back into $HOME, which sddm can't read as the sddm user
+    sudo cp -rL "$theme" /usr/share/sddm/themes/gruvbox-material
     sudo chown -R root:root /usr/share/sddm/themes/gruvbox-material
     sudo chmod -R a+rX /usr/share/sddm/themes/gruvbox-material
     sudo mkdir -p /etc/sddm.conf.d
@@ -290,7 +312,9 @@ setup_snapper() (
 # a path this machine doesn't have (the cron dirs without cronie, say) are dropped
 # rather than allowed to take the whole ruleset down with them.
 render_audit_rules() {
-    sed "s|__HOME__|$HOME|g" "$SCRIPT_DIR/audit/10-hardening.rules" | while IFS= read -r line; do
+    local rules
+    rules=$(find_asset audit/10-hardening.rules) || return 1
+    sed "s|__HOME__|$HOME|g" "$rules" | while IFS= read -r line; do
         case "$line" in
             ''|'#'*) printf '%s\n' "$line"; continue ;;
         esac
@@ -312,8 +336,13 @@ setup_audit() (
     sudo mkdir -p /etc/audit/rules.d
     # pre-10- naming from an earlier setup; leaving it would double-load the rules
     sudo rm -f /etc/audit/rules.d/hardening.rules
-    render_audit_rules | sudo tee /etc/audit/rules.d/10-hardening.rules > /dev/null
-    sudo chmod 600 /etc/audit/rules.d/10-hardening.rules
+    # staged rather than piped straight into tee: in a pipeline the exit status is
+    # tee's, so a missing source file would install an empty ruleset and report success
+    local staged
+    staged=$(mktemp)
+    render_audit_rules > "$staged"
+    sudo install -m 600 "$staged" /etc/audit/rules.d/10-hardening.rules
+    rm -f "$staged"
     sudo systemctl enable --now auditd
     # augenrules compiles rules.d/*.rules into the live ruleset; needed here
     # because auditd only runs it itself at service start
