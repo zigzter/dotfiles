@@ -1,3 +1,19 @@
+/* Gruvbox Material — palette mirrors sddm/gruvbox-material/Main.qml */
+@define-color bg0 #282828;
+@define-color bg1 #3c3836;
+@define-color bg2 #504945;
+@define-color bg3 #665c54;
+@define-color fg0 #ebdbb2;
+@define-color fg3 #a89984;
+@define-color fg4 #7c6f64;
+@define-color red #fb4934;
+@define-color green #b8bb26;
+@define-color yellow #fabd2f;
+@define-color blue #83a598;
+@define-color aqua #8ec07c;
+@define-color aqua_dim #689d6a; /* gruvbox neutral_aqua */
+@define-color orange #fe8019;
+
 * {
   border: none;
   border-radius: 0;
@@ -7,152 +23,212 @@
 }
 
 window#waybar {
-  background-color: rgba(40, 40, 40, 0.93);
-  color: #ebdbb2;
+  background-color: alpha(@bg0, 0.94);
+  border-bottom: 1px solid @bg1;
+  color: @fg3;
 }
 
-/* Workspaces */
+.modules-left {
+  padding-left: 4px;
+}
+
+.modules-right {
+  padding-right: 8px;
+}
+
+/* Workspaces — transparent fill, hairline accent border on active (SDDM TextBox idiom) */
 #workspaces {
   margin: 0 4px;
 }
 
+/* Adwaita styles buttons with a background-image gradient and a box-shadow that
+   background-color alone won't clear, so reset both here and on every state below */
 #workspaces button {
   padding: 0 9px;
+  margin: 4px 2px;
   background: transparent;
-  color: #504945;
-  border-radius: 10px;
-  transition: all 0.15s ease;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  box-shadow: none;
+  color: @fg4;
+  transition: all 120ms ease;
+}
+
+#workspaces button.empty {
+  color: @bg3;
 }
 
 #workspaces button:hover {
-  background: rgba(80, 73, 69, 0.35);
-  color: #a89984;
+  background: transparent;
+  border-color: @bg3;
   box-shadow: none;
+  color: @fg3;
+}
+
+#workspaces button.empty:hover {
+  color: @fg4;
+}
+
+/* Active on a monitor that doesn't have focus; waybar never sets it with .active */
+#workspaces button.visible {
+  color: @aqua_dim;
+  border-color: alpha(@aqua_dim, 0.4);
+}
+
+#workspaces button.visible:hover {
+  border-color: @aqua_dim;
 }
 
 #workspaces button.active {
-  color: #b8bb26;
-  background: rgba(184, 187, 38, 0.1);
+  color: @aqua;
+  background-color: alpha(@aqua, 0.08);
+  border-color: alpha(@aqua, 0.45);
 }
 
-#workspaces button.focused {
-  color: #83a598;
-  background: rgba(131, 165, 152, 0.1);
+#workspaces button.active:hover {
+  border-color: @aqua;
 }
 
 #workspaces button.urgent {
-  color: #fb4934;
-  background: rgba(251, 73, 52, 0.1);
+  color: @red;
+  background-color: alpha(@red, 0.1);
+  border-color: alpha(@red, 0.45);
 }
 
-/* Center clock */
-#clock {
-  font-size: 14px;
-  color: #ebdbb2;
-  letter-spacing: 0.04em;
+#workspaces button.urgent:hover {
+  border-color: @red;
+}
+
+/* GTK draws its own focus ring on buttons */
+#workspaces button:focus {
+  background: transparent;
+  box-shadow: none;
+  outline-style: none;
 }
 
 #mpris {
-  color: #7c6f64;
-  padding: 0 12px;
+  padding: 0 10px;
+  color: @fg4;
 }
 
 #mpris.playing {
-  color: #a89984;
+  color: @fg3;
 }
 
 #mpris.paused {
-  color: #504945;
+  color: @bg3;
 }
 
-/* Right-side modules */
-#battery,
+/* Center clock — the one full-strength element, as in the SDDM login */
+#clock {
+  padding: 0 12px;
+  color: @fg0;
+}
+
+/* Right side: icon-only toggles sit at fg4, live readouts at fg3 */
+#custom-notification,
+#idle_inhibitor,
+#bluetooth,
 #cpu,
 #memory,
-#backlight,
-#network,
-#pulseaudio,
-#bluetooth,
-#idle_inhibitor,
 #tray {
   padding: 0 10px;
-  color: #7c6f64;
+  color: @fg4;
+  transition: color 120ms ease;
 }
 
-#privacy {
-  padding: 0;
-  margin: 0 2px;
-}
-
-#privacy-item {
-  padding: 0 8px;
-  margin: 3px 2px;
-  border-radius: 8px;
-}
-
-#privacy-item.screenshare {
-  color: #fb4934;
-  background-color: rgba(251, 73, 52, 0.15);
-}
-
-#privacy-item.audio-in {
-  color: #fabd2f;
-  background-color: rgba(250, 189, 47, 0.15);
-}
-
-#privacy-item.camera {
-  color: #fe8019;
-  background-color: rgba(254, 128, 25, 0.15);
-}
-
-#idle_inhibitor.activated {
-  color: #fabd2f;
-}
-
-#custom-notification {
-  color: #7c6f64;
+#backlight,
+#pulseaudio,
+#network,
+#battery {
   padding: 0 10px;
+  color: @fg3;
+  transition: color 120ms ease;
 }
 
 #custom-notification.notification {
-  color: #fabd2f;
+  color: @yellow;
+}
+
+#idle_inhibitor.activated {
+  color: @yellow;
 }
 
 #bluetooth.connected {
-  color: #83a598;
+  color: @blue;
 }
 
-#pulseaudio {
-  color: #a89984;
+#pulseaudio.muted,
+#pulseaudio.source-muted {
+  color: @bg3;
 }
 
-#network {
-  color: #a89984;
-}
-
-#battery {
-  color: #a89984;
+#network.disconnected,
+#network.disabled {
+  color: @red;
 }
 
 #battery.good {
-  color: #b8bb26;
+  color: @green;
 }
 
 #battery.warning {
-  color: #fabd2f;
+  color: @yellow;
 }
 
 #battery.critical {
-  color: #fb4934;
-  animation: blink 0.8s linear infinite alternate;
+  color: @red;
+  animation: blink 1.2s ease-in-out infinite alternate;
 }
 
 #battery.charging,
 #battery.plugged {
-  color: #83a598;
+  color: @aqua;
 }
 
 @keyframes blink {
-  to { color: rgba(251, 73, 52, 0.4); }
+  to {
+    color: alpha(@red, 0.35);
+  }
 }
 
+#privacy {
+  padding: 0;
+  margin: 0 4px;
+}
+
+#privacy-item {
+  padding: 0 8px;
+  margin: 5px 2px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+}
+
+#privacy-item.screenshare {
+  color: @red;
+  background-color: alpha(@red, 0.12);
+  border-color: alpha(@red, 0.35);
+}
+
+#privacy-item.audio-in {
+  color: @yellow;
+  background-color: alpha(@yellow, 0.12);
+  border-color: alpha(@yellow, 0.35);
+}
+
+#privacy-item.camera {
+  color: @orange;
+  background-color: alpha(@orange, 0.12);
+  border-color: alpha(@orange, 0.35);
+}
+
+tooltip {
+  background-color: @bg0;
+  border: 1px solid @bg2;
+  border-radius: 6px;
+}
+
+tooltip label {
+  padding: 2px 4px;
+  color: @fg0;
+}

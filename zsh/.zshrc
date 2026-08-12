@@ -73,6 +73,66 @@ git() {
     fi
 }
 
+# Run a command with $HOME masked by an empty tmpfs. Only the current project,
+# the active nvm toolchain and npm's own config/cache are bound back in, so a
+# malicious install script sees no ssh keys, no aws creds, no dotfiles — and no
+# sibling repo either. The mask is a mount namespace, not a permission check, so
+# it holds against anything the command spawns.
+#
+# The toolchain has to be bound explicitly: npm lives under ~/.nvm, which the
+# mask would otherwise hide, and .npmrc with it — losing ignore-scripts=true and
+# silently re-enabling the very lifecycle scripts this is meant to contain.
+sandboxed() {
+    if [ $# -eq 0 ]; then
+        echo "usage: sandboxed <command> [args...]   (run in the project directory)" >&2
+        return 2
+    fi
+    # `whence -p`, not `command -v`: there is an npm *function* below, and
+    # `command -v npm` would return the string "npm" rather than a path, quietly
+    # making node_root garbage. -p searches $PATH only, skipping functions/aliases.
+    local node_root npm_bin
+    npm_bin=$(whence -p npm) || { echo "sandboxed: npm not found on PATH" >&2; return 1; }
+    node_root=${npm_bin:h:h}
+    mkdir -p "$HOME/.npm"
+    # -p flags must each be separate args; BindPaths takes a space-separated list
+    systemd-run --user --pty --wait --collect --quiet --same-dir \
+        -p ProtectHome=tmpfs \
+        -p "BindPaths=$PWD $HOME/.npm" \
+        -p "BindReadOnlyPaths=$node_root $HOME/.npmrc" \
+        --setenv="PATH=$node_root/bin:/usr/bin:/bin" \
+        "$@"
+}
+
+# Force the sandbox for any npm invocation, including ones the dispatch below
+# lets through: `snpm run some-untrusted-script`.
+snpm() { sandboxed "$(whence -p npm)" "$@"; }
+
+# Sandbox by default, because remembering to type `snpm` is not a security model.
+# Only the subcommands that execute third-party install hooks are wrapped: `npm
+# run` is our own scripts and genuinely needs a real $HOME — start/db:migrate in
+# pallet-services-api resolve AWS creds from ~/.aws through the SDK chain, and
+# masking that turns a credential lookup into a baffling build failure.
+# Same shape as the git() wrapper above: dispatch, else `command npm` passthrough.
+# Escape hatch for a one-off unsandboxed install is `command npm install`.
+npm() {
+    case $1 in
+        install|i|add|ci|update|up|rebuild)
+            sandboxed "$(whence -p npm)" "$@"
+            ;;
+        audit)
+            # plain `npm audit` only reads; `npm audit fix` installs
+            if [ "$2" = "fix" ]; then
+                sandboxed "$(whence -p npm)" "$@"
+            else
+                command npm "$@"
+            fi
+            ;;
+        *)
+            command npm "$@"
+            ;;
+    esac
+}
+
 export EDITOR="nvim"
 export VISUAL="nvim"
 

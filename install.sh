@@ -11,7 +11,7 @@ fi
 
 MACHINE=$(hostnamectl hostname)
 CURRENT_USER=$(whoami)
-NERD_FONTS_VERSION="v3.2.0"
+NERD_FONTS_VERSION="v3.5.0"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # audit/ and sddm/ aren't stow packages — they install to /etc and /usr/share, not
@@ -153,6 +153,18 @@ setup_power() (
     if [[ "$MACHINE" == "MADVILLAIN" ]]; then
         sudo pacman -S --noconfirm --needed brightnessctl
     fi
+)
+
+setup_via_udev() (
+    set -e
+    # Must be numbered below 73-seat-late.rules: that file's uaccess builtin applies
+    # the ACL, and it only sees the tag if we set it first. At 90+ the tag lands too
+    # late, the logged-in user never gets the hidraw node, and VIA fails to open it.
+    # 19f5:3315 is the NuPhy Halo65 V2.
+    printf '%s\n' 'KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="19f5", ATTRS{idProduct}=="3315", MODE="0660", TAG+="uaccess"' \
+        | sudo tee /etc/udev/rules.d/60-via.rules > /dev/null
+    sudo udevadm control --reload-rules
+    sudo udevadm trigger
 )
 
 setup_pacman() (
@@ -298,6 +310,17 @@ setup_snapper() (
         NUMBER_LIMIT=20
     # /home churns far harder than / (build output, node_modules), and snap-pac
     # only snapshots root, so home leans on the timeline rather than NUMBER limits
+    #
+    # ALLOW_USERS is deliberately empty. Snapper has no read-only delegation: any
+    # user listed here can also `snapper -c home delete`, which would let a
+    # process running as that user destroy every snapshot and then wipe /home —
+    # exactly the threat these snapshots exist to survive. Left empty, snapshots
+    # are root-owned read-only subvolumes that an unprivileged wipe cannot touch.
+    # Set empty rather than omitted so re-running revokes it on a machine that
+    # was configured before this change; SYNC_ACL=yes stays on so snapper strips
+    # the .snapshots ACL it granted earlier. Browsing now needs sudo:
+    #   sudo snapper -c home list
+    #   sudo snapper -c home undochange <N>..0 /home/ziggy/some/path
     sudo snapper -c home set-config \
         TIMELINE_CREATE=yes \
         TIMELINE_CLEANUP=yes \
@@ -308,7 +331,7 @@ setup_snapper() (
         TIMELINE_LIMIT_MONTHLY=3 \
         TIMELINE_LIMIT_YEARLY=0 \
         NUMBER_LIMIT=10 \
-        ALLOW_USERS="$CURRENT_USER" \
+        ALLOW_USERS="" \
         SYNC_ACL=yes
     # written whole rather than appended: on a fresh install this file is empty, so
     # appending "home" would silently leave root unregistered
@@ -386,6 +409,7 @@ main() (
     setup_docker
     setup_bluetooth
     setup_power
+    setup_via_udev
     setup_sddm
     setup_sddm_theme
     setup_zsh
