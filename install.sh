@@ -42,7 +42,7 @@ PKGS_BASE=(
     docker docker-compose
     upower power-profiles-daemon
     ttf-font-awesome noto-fonts noto-fonts-emoji
-    v4l-utils obsidian loupe vlc
+    v4l-utils obsidian loupe vlc tree-sitter tree-sitter-cli
 )
 
 PKGS_HYPRLAND=(

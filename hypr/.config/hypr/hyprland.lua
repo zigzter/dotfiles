@@ -5,7 +5,7 @@ local inactive_border_color = "rgb(504945)" -- dark_bg2
 local dark_bg4 = "rgb(7c6f64)" -- used for the shadow color below
 
 ---- MONITORS ----
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
+hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1})
 hl.monitor({ output = "DP-1", mode = "2560x1440@170", position = "0x0", scale = 1 })
 hl.monitor({ output = "DP-2", mode = "1920x1080@144", position = "-1920x0", scale = 1 })
 
@@ -49,7 +49,11 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("nm-applet --indicator")
-    hl.exec_cmd("bash -c '[[ $(hostnamectl hostname) == \"MADVILLAIN\" ]] && hyprctl keyword input:kb_options caps:escape'")
+    -- Swap caps/escape on the laptop, but only when the NuPhy Halo65 V2 (see
+    -- setup_via_udev in install.sh, vendor 19f5 product 3315) isn't plugged in.
+    -- hyprctl keyword doesn't work on this Hyprland version's Lua config parser
+    -- ("keyword can't work with non-legacy parsers") — hyprctl eval is the replacement.
+    hl.exec_cmd("bash -c '[[ $(hostnamectl hostname) == \"MADVILLAIN\" ]] || exit 0; for f in /sys/bus/usb/devices/*/idVendor; do d=$(dirname \"$f\"); [[ \"$(cat \"$f\" 2>/dev/null)\" == \"19f5\" && \"$(cat \"$d/idProduct\" 2>/dev/null)\" == \"3315\" ]] && exit 0; done; hyprctl eval \"hl.config({ input = { kb_options = \\\"caps:escape\\\" } })\"'")
     hl.exec_cmd("blueman-applet")
     hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")

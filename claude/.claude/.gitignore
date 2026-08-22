@@ -2,3 +2,5 @@
 !.gitignore
 !CLAUDE.md
 !settings.json
+!output-styles
+!output-styles/**
