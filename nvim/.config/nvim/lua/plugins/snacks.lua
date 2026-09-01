@@ -10,6 +10,18 @@ return {
         dashboard = {},
         bigfile = {},
         notifier = {},
+        picker = {
+            sources = {
+                files = {
+                    hidden = true,
+                    exclude = { "node_modules", "*.png", ".git" },
+                },
+                grep = {
+                    hidden = true,
+                    exclude = { "node_modules", "*.png", ".git" },
+                },
+            },
+        },
         indent = {
             indent = {
                 enabled = false,

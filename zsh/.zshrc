@@ -37,6 +37,7 @@ alias tmn='~/tmux-new.sh'
 alias cc='claude'
 alias ccu='claude update'
 alias ccr='claude --resume'
+alias rgf='rg --files | rg'
 
 # Get top 5 size offenders
 sizing() {

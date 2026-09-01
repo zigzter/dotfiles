@@ -9,10 +9,10 @@ return {
       left = {
         "mode",
         "path",
-        function()
-          local slimline_custom = require("custom.slimline_breadcrumbs")
-          return slimline_custom.get_navic_breadcrumbs()
-        end,
+        -- function()
+        --   local slimline_custom = require("custom.slimline_breadcrumbs")
+        --   return slimline_custom.get_navic_breadcrumbs()
+        -- end,
       },
       center = {},
       right = {
@@ -21,7 +21,7 @@ return {
         "filetype_lsp",
         "progress",
         "recording",
-      }
+      },
     },
     configs = {
       git = {
