@@ -13,8 +13,33 @@
 - `fzf`, `zoxide` for navigation
 - `jq` for JSON
 
+## Code comments
+Write as few comments as possible. Add a comment only if a reader cannot understand the code from the code itself.
+
+- Add an inline comment only for a hidden constraint, a workaround, or surprising behaviour.
+- Do not write a comment that repeats what the code does.
+- Do not write a comment that justifies or sells the code ("so consumers never have to...", "to be safe", "for robustness").
+- Do not use idioms or metaphors ("belt-and-suspenders", "just in case", "under the hood").
+- Do not describe the change history ("now uses X", "changed from Y", "new approach").
+- Write each comment in ASD-STE100 style: short sentences, active voice, present tense, simple words.
+- Keep a comment to one line if possible. Use two lines at most for an inline comment.
+
+JSDoc and docstrings:
+- Say what the function or method does. Do not say why it exists or why the caller needs it.
+- Start with a verb in the present tense ("Returns...", "Sets...", "Parses...").
+- Keep the summary to one sentence. Add `@param` or `@returns` only if the name and type do not make them clear.
+
+Example. Not this:
+```js
+// Belt-and-suspenders: reflect the incoming value once the choice list is live,
+// so consumers never have to poke the selected label into the DOM by hand.
+```
+This (or no comment, if the code is clear):
+```js
+// Set the selected label after the options render.
+```
+
 ## Coding guidelines
-- No comments unless the WHY is non-obvious (a hidden constraint, workaround, or surprising behaviour)
 - No unnecessary abstractions - three similar lines beats a premature helper
 - No boilerplate error handling for things that can't fail; only validate at system boundaries
 - Trust the type system and framework; don't add defensive guards for internal code paths

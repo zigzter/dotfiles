@@ -40,7 +40,7 @@
       "Bash(npm publish*)"
     ]
   },
-  "model": "sonnet",
+  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "bash \"$HOME/.claude/statusline.sh\""
@@ -48,7 +48,8 @@
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true
   },
+  "outputStyle": "ASD-STE100",
   "tui": "fullscreen",
   "theme": "dark",
-  "outputStyle": "ASD-STE100"
+  "agentPushNotifEnabled": false
 }
