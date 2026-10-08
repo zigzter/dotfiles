@@ -2,5 +2,6 @@
 !.gitignore
 !CLAUDE.md
 !settings.json
+!statusline.sh
 !output-styles
 !output-styles/**
