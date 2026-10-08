@@ -20,6 +20,9 @@ return {
                     hidden = true,
                     exclude = { "node_modules", "*.png", ".git" },
                 },
+                lines = {
+                    layout = { preset = "default", preview = true },
+                },
             },
         },
         indent = {

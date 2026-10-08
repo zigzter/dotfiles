@@ -21,6 +21,7 @@
     "cpu",
     "memory",
     "battery",
+    "custom/recording",
     "privacy"
   ],
   "hyprland/workspaces": {
@@ -137,6 +138,12 @@
         "type": "audio-in"
       }
     ]
+  },
+  "custom/recording": {
+    "exec": "pgrep -x wf-recorder > /dev/null && echo '{\"text\": \"󰑊 REC\", \"tooltip\": false}' || echo '{\"text\": \"\"}'",
+    "return-type": "json",
+    "interval": 1,
+    "on-click": "pkill -INT wf-recorder"
   },
   "idle_inhibitor": {
     "format": "{icon}",

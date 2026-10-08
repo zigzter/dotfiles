@@ -192,6 +192,15 @@ window#waybar {
   }
 }
 
+#custom-recording {
+  padding: 0 8px;
+  margin: 5px 2px;
+  border: 1px solid alpha(@red, 0.35);
+  border-radius: 6px;
+  color: @red;
+  background-color: alpha(@red, 0.12);
+}
+
 #privacy {
   padding: 0;
   margin: 0 4px;

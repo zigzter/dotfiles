@@ -33,11 +33,12 @@ alias ff=fastfetch
 alias se='SUDO_EDITOR=nvim sudoedit'
 alias syu='sudo pacman -Syu'
 alias pacclean='sudo paccache -rk 2'
-alias tmn='~/tmux-new.sh'
 alias cc='claude'
 alias ccu='claude update'
 alias ccr='claude --resume'
 alias rgf='rg --files | rg'
+alias nrl='npm run serve:local'
+alias nrs='npm start'
 
 # Get top 5 size offenders
 sizing() {
