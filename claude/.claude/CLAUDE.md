@@ -45,6 +45,17 @@ This (or no comment, if the code is clear):
 - Trust the type system and framework; don't add defensive guards for internal code paths
 - Prefer readability over conciseness
 
+## Tests
+Write few tests. Each test must protect behaviour that matters.
+
+- Test the important cases only: core business logic, real edge cases, and fixed bugs (one regression test per bug).
+- Do not test trivial code: getters, setters, simple wrappers, constants, or framework behaviour.
+- Do not test the same behaviour more than once. One good test is better than five variations.
+- Do not write a test for each branch or input only to increase coverage.
+- Do not add tests to unrelated code when you change a file.
+- Before you add a test, check the existing tests. Extend one if it already covers the area.
+- If you are not sure a test is useful, do not write it. Ask me if it is important.
+
 ## Languages and tooling
 
 ### Lua (Neovim config)
