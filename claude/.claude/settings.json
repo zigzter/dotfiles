@@ -67,7 +67,7 @@
       }
     }
   },
-  "outputStyle": "ASD-STE100",
+  "outputStyle": "Concise",
   "tui": "fullscreen",
   "theme": "dark",
   "agentPushNotifEnabled": false
