@@ -49,11 +49,6 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("nm-applet --indicator")
-    -- Swap caps/escape on the laptop, but only when the NuPhy Halo65 V2 (see
-    -- setup_via_udev in install.sh, vendor 19f5 product 3315) isn't plugged in.
-    -- hyprctl keyword doesn't work on this Hyprland version's Lua config parser
-    -- ("keyword can't work with non-legacy parsers") — hyprctl eval is the replacement.
-    hl.exec_cmd("bash -c '[[ $(hostnamectl hostname) == \"MADVILLAIN\" ]] || exit 0; for f in /sys/bus/usb/devices/*/idVendor; do d=$(dirname \"$f\"); [[ \"$(cat \"$f\" 2>/dev/null)\" == \"19f5\" && \"$(cat \"$d/idProduct\" 2>/dev/null)\" == \"3315\" ]] && exit 0; done; hyprctl eval \"hl.config({ input = { kb_options = \\\"caps:escape\\\" } })\"'")
     hl.exec_cmd("blueman-applet")
     hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
@@ -85,6 +80,8 @@ hl.config({
     },
 })
 
+-- The built-in keyboard of the laptop.
+hl.device({ name = "at-translated-set-2-keyboard", kb_options = "caps:escape" })
 hl.device({ name = "logitech-pro-x-1", sensitivity = -0.6 })
 hl.device({ name = "epic-mouse-v1", sensitivity = -0.5 })
 hl.device({ name = "logitech-usb-receiver", sensitivity = -0.8 })

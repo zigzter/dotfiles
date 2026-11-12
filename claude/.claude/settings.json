@@ -57,7 +57,8 @@
     "cc-plugin-agents-md@builtin": true,
     "claude-md-management@anthropic-plugin-directory": true,
     "security-guidance@anthropic-plugin-directory": true,
-    "code-simplifier@claude-plugins-official": true
+    "code-simplifier@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "impeccable": {
