@@ -11,7 +11,6 @@ fi
 
 MACHINE=$(hostnamectl hostname)
 CURRENT_USER=$(whoami)
-NERD_FONTS_VERSION="v3.5.0"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # audit/ and sddm/ aren't stow packages — they install to /etc and /usr/share, not
@@ -41,7 +40,7 @@ PKGS_BASE=(
     firefox unzip jq zoxide
     docker docker-compose
     upower power-profiles-daemon
-    ttf-font-awesome noto-fonts noto-fonts-emoji
+    ttf-font-awesome ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji
     v4l-utils obsidian loupe vlc tree-sitter tree-sitter-cli
 )
 
@@ -121,19 +120,6 @@ install_gpu_drivers() (
     elif [[ "$MACHINE" == "MADVILLAIN" ]]; then
         sudo pacman -S --noconfirm --needed mesa vulkan-intel intel-media-driver
     fi
-)
-
-install_fonts() (
-    set -e
-    local tmp_dir
-    tmp_dir=$(mktemp -d)
-    mkdir -p "$HOME/.local/share/fonts"
-    curl -fL "https://github.com/ryanoasis/nerd-fonts/releases/download/${NERD_FONTS_VERSION}/JetBrainsMono.zip" \
-        -o "$tmp_dir/JetBrainsMono.zip"
-    unzip "$tmp_dir/JetBrainsMono.zip" -d "$tmp_dir/jetbrains"
-    mv "$tmp_dir/jetbrains/"*.ttf "$HOME/.local/share/fonts/"
-    rm -rf "$tmp_dir"
-    fc-cache -fv
 )
 
 setup_docker() (
@@ -405,7 +391,6 @@ main() (
     install_packages
     install_microcode
     install_gpu_drivers
-    install_fonts
     setup_docker
     setup_bluetooth
     setup_power
