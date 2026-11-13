@@ -14,44 +14,44 @@
 @define-color aqua_dim #689d6a; /* gruvbox neutral_aqua */
 @define-color orange #fe8019;
 
+/* Propo keeps icons at their natural width; the Mono variant shrinks them to one cell */
 * {
   border: none;
   border-radius: 0;
-  font-family: "JetBrainsMono Nerd Font Mono";
+  font-family: "JetBrainsMono Nerd Font Propo";
   font-size: 13px;
   min-height: 0;
 }
 
 window#waybar {
-  background-color: alpha(@bg0, 0.94);
-  border-bottom: 1px solid @bg1;
+  background-color: alpha(@bg0, 0.96);
+  border-bottom: 1px solid alpha(@bg1, 0.6);
   color: @fg3;
 }
 
 .modules-left {
-  padding-left: 4px;
+  padding-left: 6px;
 }
 
 .modules-right {
-  padding-right: 8px;
+  padding-right: 10px;
 }
 
-/* Workspaces — transparent fill, hairline accent border on active (SDDM TextBox idiom) */
 #workspaces {
-  margin: 0 4px;
+  margin: 0 6px 0 0;
 }
 
 /* Adwaita styles buttons with a background-image gradient and a box-shadow that
    background-color alone won't clear, so reset both here and on every state below */
 #workspaces button {
-  padding: 0 9px;
-  margin: 4px 2px;
+  padding: 0 10px;
+  margin: 5px 1px;
   background: transparent;
-  border: 1px solid transparent;
-  border-radius: 6px;
+  border-radius: 8px;
   box-shadow: none;
   color: @fg4;
-  transition: all 120ms ease;
+  font-size: 15px;
+  transition: all 150ms ease-out;
 }
 
 #workspaces button.empty {
@@ -59,97 +59,90 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  background: transparent;
-  border-color: @bg3;
+  background: alpha(@bg1, 0.7);
   box-shadow: none;
-  color: @fg3;
-}
-
-#workspaces button.empty:hover {
-  color: @fg4;
+  color: @fg0;
 }
 
 /* Active on a monitor that doesn't have focus; waybar never sets it with .active */
 #workspaces button.visible {
   color: @aqua_dim;
-  border-color: alpha(@aqua_dim, 0.4);
-}
-
-#workspaces button.visible:hover {
-  border-color: @aqua_dim;
+  background-color: alpha(@aqua_dim, 0.08);
 }
 
 #workspaces button.active {
   color: @aqua;
-  background-color: alpha(@aqua, 0.08);
-  border-color: alpha(@aqua, 0.45);
-}
-
-#workspaces button.active:hover {
-  border-color: @aqua;
+  background-color: alpha(@aqua, 0.14);
 }
 
 #workspaces button.urgent {
   color: @red;
-  background-color: alpha(@red, 0.1);
-  border-color: alpha(@red, 0.45);
-}
-
-#workspaces button.urgent:hover {
-  border-color: @red;
+  background-color: alpha(@red, 0.14);
 }
 
 /* GTK draws its own focus ring on buttons */
 #workspaces button:focus {
-  background: transparent;
   box-shadow: none;
   outline-style: none;
 }
 
 #mpris {
   padding: 0 10px;
-  color: @fg4;
-}
-
-#mpris.playing {
+  font-family: "Adwaita Sans", "JetBrainsMono Nerd Font Propo";
   color: @fg3;
 }
 
 #mpris.paused {
-  color: @bg3;
+  color: @fg4;
 }
 
-/* Center clock — the one full-strength element, as in the SDDM login */
 #clock {
   padding: 0 12px;
+  font-family: "Adwaita Sans", "JetBrainsMono Nerd Font Propo";
+  font-weight: 600;
   color: @fg0;
 }
 
-/* Right side: icon-only toggles sit at fg4, live readouts at fg3 */
+#custom-notification,
+#idle_inhibitor,
+#bluetooth,
+#backlight,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#battery {
+  padding: 0 7px;
+  color: @fg3;
+  transition: color 150ms ease-out;
+}
+
+/* Gaps split the right side into toggles, controls, system load and power */
+#bluetooth,
+#network,
+#memory {
+  margin-right: 14px;
+}
+
 #custom-notification,
 #idle_inhibitor,
 #bluetooth,
 #cpu,
-#memory,
-#tray {
-  padding: 0 10px;
+#memory {
   color: @fg4;
-  transition: color 120ms ease;
 }
 
-#backlight,
-#pulseaudio,
-#network,
-#battery {
-  padding: 0 10px;
-  color: @fg3;
-  transition: color 120ms ease;
+#custom-notification:hover,
+#idle_inhibitor:hover,
+#bluetooth:hover,
+#backlight:hover,
+#pulseaudio:hover,
+#network:hover,
+#battery:hover {
+  color: @fg0;
 }
 
-#custom-notification.notification {
-  color: @yellow;
-}
-
+#custom-notification.notification,
 #idle_inhibitor.activated {
   color: @yellow;
 }
@@ -168,22 +161,18 @@ window#waybar {
   color: @red;
 }
 
-#battery.good {
-  color: @green;
-}
-
-#battery.warning {
-  color: @yellow;
-}
-
-#battery.critical {
-  color: @red;
-  animation: blink 1.2s ease-in-out infinite alternate;
-}
-
 #battery.charging,
 #battery.plugged {
   color: @aqua;
+}
+
+#battery.warning:not(.charging) {
+  color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+  color: @red;
+  animation: blink 1.2s ease-in-out infinite alternate;
 }
 
 @keyframes blink {
@@ -193,51 +182,46 @@ window#waybar {
 }
 
 #custom-recording {
-  padding: 0 8px;
-  margin: 5px 2px;
-  border: 1px solid alpha(@red, 0.35);
-  border-radius: 6px;
+  padding: 0 9px;
+  margin: 6px 2px 6px 6px;
+  border-radius: 8px;
   color: @red;
-  background-color: alpha(@red, 0.12);
+  background-color: alpha(@red, 0.14);
 }
 
 #privacy {
   padding: 0;
-  margin: 0 4px;
+  margin: 0 0 0 4px;
 }
 
 #privacy-item {
-  padding: 0 8px;
-  margin: 5px 2px;
-  border: 1px solid transparent;
-  border-radius: 6px;
+  padding: 0 9px;
+  margin: 6px 2px;
+  border-radius: 8px;
 }
 
 #privacy-item.screenshare {
   color: @red;
-  background-color: alpha(@red, 0.12);
-  border-color: alpha(@red, 0.35);
+  background-color: alpha(@red, 0.14);
 }
 
 #privacy-item.audio-in {
   color: @yellow;
-  background-color: alpha(@yellow, 0.12);
-  border-color: alpha(@yellow, 0.35);
+  background-color: alpha(@yellow, 0.14);
 }
 
 #privacy-item.camera {
   color: @orange;
-  background-color: alpha(@orange, 0.12);
-  border-color: alpha(@orange, 0.35);
+  background-color: alpha(@orange, 0.14);
 }
 
 tooltip {
   background-color: @bg0;
   border: 1px solid @bg2;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 tooltip label {
-  padding: 2px 4px;
+  padding: 4px 6px;
   color: @fg0;
 }

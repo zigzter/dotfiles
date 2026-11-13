@@ -56,7 +56,7 @@
     "on-click": "playerctl play-pause"
   },
   "clock": {
-    "format": "{:%a %b %d - %I:%M %p}",
+    "format": "<span weight='normal' color='#a89984'>{0:%a %b %d}</span>   {0:%I:%M %p}",
     "format-alt": "{:%B %d, %Y}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
